@@ -1,0 +1,879 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>蜜桃视频 - 剧集综艺短视频聚合</title>
+<meta name="description" content="蜜桃视频汇聚都市情感剧、古装权谋、悬疑短剧、综艺真人秀与生活短视频等具体条目，提供分集更新、看点解析、口碑评分与新片上架动态，适合追剧与短视频浏览用户按类型筛选观看。">
+<meta name="keywords" content="都市情感剧,古装权谋剧,悬疑短剧,综艺真人秀,生活短视频">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23e8546a'/%3E%3Cpath d='M16 8c4 3 7 6 7 10a7 7 0 1 1-14 0c0-4 3-7 7-10z' fill='%23ffe0e6'/%3E%3Cpath d='M16 12v9M16 16l-3 2M16 16l3 2' stroke='%23e8546a' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  --pink:#e8546a;--pink-dark:#c53b52;--pink-soft:#fdeef1;--peach:#ff9a76;
+  --ink:#241b1f;--ink-2:#4a3d43;--ink-3:#7d6f75;--line:#f0dde2;
+  --bg:#fffafb;--panel:#ffffff;--panel-2:#fdf3f5;
+  --radius:14px;--radius-s:9px;
+  --shadow:0 4px 18px rgba(200,80,100,.08);--shadow-h:0 10px 28px rgba(200,80,100,.14);
+  --max:1320px;
+  --head-h:108px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;font-size:15.5px;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{margin:0;line-height:1.35;font-weight:800}
+p{margin:0 0 .8em}
+ul,ol{margin:0 0 .8em;padding-left:1.2em}
+li{margin-bottom:.35em}
+[id]{scroll-margin-top:calc(var(--head-h) + 16px)}
+.container{max-width:var(--max);margin:0 auto;padding:0 22px}
+/* ===== 吸顶公告条 + 页头 ===== */
+.sticky-wrap{position:sticky;top:0;z-index:60;background:rgba(255,250,251,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.notice-bar{background:linear-gradient(90deg,var(--pink),var(--peach));color:#fff;font-size:13.5px}
+.notice-bar .container{display:flex;align-items:center;gap:12px;min-height:34px;flex-wrap:wrap}
+.notice-tag{background:rgba(255,255,255,.24);border-radius:20px;padding:1px 10px;font-weight:700;letter-spacing:.5px;white-space:nowrap}
+.notice-bar a{color:#fff;text-decoration:underline;text-underline-offset:3px;font-weight:600}
+.site-header .container{display:flex;align-items:center;gap:18px;min-height:72px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:21px;letter-spacing:.5px;color:var(--ink)}
+.brand svg{width:38px;height:38px;flex:none}
+.brand .brand-sub{font-size:11px;font-weight:600;color:var(--pink);letter-spacing:1px;display:block;line-height:1}
+.main-nav{display:flex;gap:4px;flex-wrap:wrap;margin-left:6px}
+.main-nav a{padding:6px 11px;border-radius:20px;font-size:14px;color:var(--ink-2);font-weight:600;transition:.2s}
+.main-nav a:hover,.main-nav a:focus-visible{background:var(--pink-soft);color:var(--pink-dark);outline:none}
+.top-tools{margin-left:auto;display:flex;align-items:center;gap:10px}
+.search-box{display:flex;align-items:center;background:var(--panel-2);border:1px solid var(--line);border-radius:22px;padding:3px 4px 3px 14px}
+.search-box input{border:none;background:transparent;font-size:14px;width:150px;outline:none;color:var(--ink);font-family:inherit}
+.search-box button{border:none;background:var(--pink);color:#fff;border-radius:18px;padding:5px 14px;font-size:13.5px;font-weight:700;cursor:pointer;font-family:inherit}
+.search-box button:hover{background:var(--pink-dark)}
+.quick-link{font-size:14px;font-weight:700;color:var(--pink-dark);border:1px solid var(--pink);border-radius:20px;padding:5px 13px;transition:.2s;white-space:nowrap}
+.quick-link:hover{background:var(--pink);color:#fff}
+.search-result-tip{display:none;background:#fff6e5;border:1px dashed #e8b25c;color:#8a5a12;font-size:13.5px;border-radius:8px;padding:6px 12px;margin:0 0 16px}
+/* ===== 首屏 ===== */
+.hero{position:relative;overflow:hidden;background:linear-gradient(160deg,#fff2f4 0%,#fffafb 55%,#fff4ec 100%);border-bottom:1px solid var(--line)}
+.hero .container{display:grid;grid-template-columns:1.15fr .85fr;gap:34px;align-items:center;padding-top:40px;padding-bottom:44px}
+.hero-tag{display:inline-block;background:var(--pink);color:#fff;font-size:12.5px;font-weight:700;letter-spacing:1.5px;padding:3px 13px;border-radius:16px;margin-bottom:14px}
+.hero h1{font-size:46px;letter-spacing:1px;color:var(--ink);margin-bottom:14px}
+.hero h1 em{font-style:normal;color:var(--pink-dark)}
+.hero-desc{font-size:16px;color:var(--ink-2);max-width:560px;margin-bottom:20px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 22px;border-radius:26px;font-weight:700;font-size:14.5px;border:1px solid transparent;cursor:pointer;transition:.2s;font-family:inherit}
+.btn-primary{background:var(--pink);color:#fff;box-shadow:0 6px 16px rgba(232,84,106,.32)}
+.btn-primary:hover{background:var(--pink-dark)}
+.btn-ghost{background:#fff;color:var(--pink-dark);border-color:var(--pink)}
+.btn-ghost:hover{background:var(--pink-soft)}
+.hero-stats{display:flex;gap:26px;flex-wrap:wrap}
+.hero-stats div{font-size:13px;color:var(--ink-3)}
+.hero-stats strong{display:block;font-size:23px;color:var(--pink-dark);font-weight:900;line-height:1.2}
+.hero-visual{position:relative;min-height:300px}
+.hero-visual .hv-card{position:absolute;border-radius:16px;overflow:hidden;box-shadow:var(--shadow-h);border:3px solid #fff;background:#fff}
+.hv-1{width:58%;left:0;top:6%;transform:rotate(-4deg);z-index:2}
+.hv-2{width:52%;right:0;top:0;transform:rotate(3deg);z-index:1}
+.hv-3{width:46%;right:14%;bottom:0;transform:rotate(-2deg);z-index:3}
+.hv-card img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/3}
+.hv-label{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(transparent,rgba(30,10,16,.78));color:#fff;font-size:12.5px;font-weight:700;padding:16px 10px 7px}
+/* ===== 主布局：三栏门户 ===== */
+.layout{display:grid;grid-template-columns:176px minmax(0,1fr) 250px;gap:26px;align-items:start;padding-top:30px;padding-bottom:20px}
+.channel-col{position:sticky;top:calc(var(--head-h) + 16px)}
+.side-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.side-card h3{font-size:14px;padding:11px 14px;background:var(--panel-2);border-bottom:1px solid var(--line);color:var(--pink-dark);letter-spacing:.6px}
+.channel-list{list-style:none;margin:0;padding:6px}
+.channel-list a{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;font-size:14px;font-weight:600;color:var(--ink-2);transition:.18s}
+.channel-list a:hover,.channel-list a:focus-visible{background:var(--pink-soft);color:var(--pink-dark);outline:none}
+.channel-list .dot{width:7px;height:7px;border-radius:50%;background:var(--peach);flex:none}
+.channel-list .cnt{margin-left:auto;font-size:11.5px;color:var(--ink-3);font-weight:500}
+.main-col{min-width:0}
+.aux-col{display:flex;flex-direction:column;gap:20px}
+.rank-list{list-style:none;margin:0;padding:8px 10px 12px}
+.rank-list li{display:flex;gap:9px;padding:8px 4px;border-bottom:1px dashed var(--line);font-size:13.5px}
+.rank-list li:last-child{border-bottom:none}
+.rank-no{width:20px;height:20px;flex:none;border-radius:6px;background:var(--panel-2);color:var(--ink-3);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:3px}
+.rank-list li:nth-child(-n+3) .rank-no{background:var(--pink);color:#fff}
+.rank-list a{font-weight:700;color:var(--ink);line-height:1.4}
+.rank-list a:hover{color:var(--pink-dark)}
+.rank-meta{display:block;font-size:11.5px;color:var(--ink-3);margin-top:2px;font-weight:500}
+/* ===== 板块通用 ===== */
+.section{margin-bottom:38px}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:16px;padding-bottom:9px;border-bottom:2px solid var(--line)}
+.sec-head h2{font-size:21px;color:var(--ink);position:relative;padding-left:13px}
+.sec-head h2::before{content:"";position:absolute;left:0;top:5px;bottom:5px;width:5px;border-radius:3px;background:linear-gradient(var(--pink),var(--peach))}
+.sec-head .sec-more{font-size:13px;font-weight:700;color:var(--pink-dark);white-space:nowrap}
+.sec-head .sec-more:hover{text-decoration:underline}
+.sec-lead{font-size:14px;color:var(--ink-3);margin:-6px 0 16px}
+/* 概览 */
+.overview{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow);font-size:15px;color:var(--ink-2)}
+.overview p:last-child{margin-bottom:0}
+.overview strong{color:var(--pink-dark)}
+/* 卡片网格 */
+.card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s;display:flex;flex-direction:column;min-width:0}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-h)}
+.card .thumb{width:100%;aspect-ratio:4/3;object-fit:cover}
+.card-body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:7px;flex:1}
+.card h3{font-size:15.5px;font-weight:800;line-height:1.45}
+.card h3 a:hover{color:var(--pink-dark)}
+.type-tag{display:inline-block;font-size:11.5px;font-weight:700;color:var(--pink-dark);background:var(--pink-soft);border-radius:5px;padding:1px 8px;align-self:flex-start}
+.card .desc{font-size:13px;color:var(--ink-2);margin:0;flex:1}
+.tag-row{display:flex;flex-wrap:wrap;gap:5px}
+.mini-tag{font-size:11.5px;color:var(--ink-3);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:1px 8px;white-space:nowrap}
+.card-foot{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--ink-3);border-top:1px dashed var(--line);padding-top:8px;margin-top:2px}
+.score{color:var(--pink-dark);font-weight:800;font-size:13.5px}
+/* 更新流 */
+.update-list{list-style:none;margin:0;padding:0;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.update-list li{display:flex;gap:12px;align-items:flex-start;padding:11px 16px;border-bottom:1px solid var(--line)}
+.update-list li:last-child{border-bottom:none}
+.update-list .up-time{flex:none;width:64px;font-size:12px;font-weight:700;color:var(--pink-dark);padding-top:2px}
+.update-list .up-name{font-weight:700;font-size:14.5px;color:var(--ink)}
+.update-list .up-name a:hover{color:var(--pink-dark)}
+.update-list .up-txt{font-size:13px;color:var(--ink-2);margin:1px 0 0}
+.up-badge{display:inline-block;font-size:11px;font-weight:700;color:#fff;background:var(--peach);border-radius:4px;padding:0 6px;margin-left:6px;vertical-align:1px}
+/* 分类入口 */
+.cat-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.cat-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-s);padding:13px 14px;transition:.2s;display:block}
+.cat-card:hover{border-color:var(--pink);background:var(--pink-soft)}
+.cat-card strong{display:block;font-size:14.5px;color:var(--ink);margin-bottom:2px}
+.cat-card span{font-size:12px;color:var(--ink-3)}
+/* 深度解析 */
+.article-box{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:26px 30px;box-shadow:var(--shadow)}
+.article-box h3{font-size:17.5px;color:var(--pink-dark);margin:22px 0 9px;padding-left:11px;border-left:4px solid var(--peach)}
+.article-box h3:first-child{margin-top:0}
+.article-box p{font-size:15px;color:var(--ink-2)}
+.article-box ul{font-size:14.8px;color:var(--ink-2)}
+.article-box li strong{color:var(--ink)}
+/* 消费路径 */
+.path-steps{display:grid;gap:12px;counter-reset:step}
+.path-step{display:flex;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-s);padding:14px 18px;box-shadow:var(--shadow)}
+.path-step::before{counter-increment:step;content:counter(step);flex:none;width:30px;height:30px;border-radius:9px;background:linear-gradient(140deg,var(--pink),var(--peach));color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:15px;margin-top:2px}
+.path-step h3{font-size:15px;margin-bottom:3px}
+.path-step p{font-size:13.8px;color:var(--ink-2);margin:0}
+/* FAQ */
+.faq-wrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.faq-wrap details{border-bottom:1px solid var(--line)}
+.faq-wrap details:last-child{border-bottom:none}
+.faq-wrap summary{cursor:pointer;padding:14px 20px;font-weight:700;font-size:15px;color:var(--ink);list-style:none;display:flex;justify-content:space-between;gap:10px;transition:.18s}
+.faq-wrap summary::-webkit-details-marker{display:none}
+.faq-wrap summary::after{content:"＋";color:var(--pink);font-weight:900;flex:none}
+.faq-wrap details[open] summary{background:var(--pink-soft);color:var(--pink-dark)}
+.faq-wrap details[open] summary::after{content:"－"}
+.faq-wrap .faq-a{padding:0 20px 16px;font-size:14.2px;color:var(--ink-2)}
+/* 评论 */
+.comment-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.comment{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-s);padding:12px 15px;box-shadow:var(--shadow)}
+.comment .who{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.comment .avatar{width:26px;height:26px;border-radius:50%;background:linear-gradient(140deg,var(--pink),var(--peach));color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}
+.comment .name{font-size:13.5px;font-weight:700;color:var(--ink)}
+.comment .date{font-size:11.5px;color:var(--ink-3);margin-left:auto}
+.comment p{font-size:13.5px;color:var(--ink-2);margin:0}
+/* 资讯 */
+.news-list{display:grid;gap:12px}
+.news-item{display:grid;grid-template-columns:150px 1fr;gap:16px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-s);overflow:hidden;box-shadow:var(--shadow);transition:.2s}
+.news-item:hover{border-color:var(--pink)}
+.news-item img{width:100%;height:100%;object-fit:cover;min-height:104px}
+.news-body{padding:11px 16px 12px 0}
+.news-body h3{font-size:15px;margin-bottom:4px}
+.news-body h3 a:hover{color:var(--pink-dark)}
+.news-date{font-size:12px;color:var(--pink-dark);font-weight:700;margin-right:8px}
+.news-body p{font-size:13.2px;color:var(--ink-2);margin:0}
+/* 相关推荐标签 */
+.reco-tags{display:flex;flex-wrap:wrap;gap:10px}
+.reco-tags a{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:7px 16px;font-size:13.8px;font-weight:600;color:var(--ink-2);transition:.2s;box-shadow:var(--shadow)}
+.reco-tags a:hover{background:var(--pink);border-color:var(--pink);color:#fff}
+/* 时间线 */
+.timeline{list-style:none;margin:0;padding:4px 0 0 18px;border-left:2px dashed var(--line)}
+.timeline li{position:relative;padding:0 0 18px 16px}
+.timeline li::before{content:"";position:absolute;left:-25px;top:6px;width:11px;height:11px;border-radius:50%;background:#fff;border:3px solid var(--pink)}
+.timeline .tl-date{font-size:12.5px;font-weight:800;color:var(--pink-dark)}
+.timeline .tl-title{font-size:14.5px;font-weight:700;color:var(--ink);margin:1px 0 2px}
+.timeline .tl-desc{font-size:13px;color:var(--ink-2);margin:0}
+/* 引语 / 证言 */
+.quote-box{background:linear-gradient(150deg,#fff3f5,#fff9f3);border:1px solid var(--line);border-radius:var(--radius);padding:20px 24px;position:relative;box-shadow:var(--shadow)}
+.quote-box::before{content:"“";position:absolute;left:16px;top:2px;font-size:60px;color:rgba(232,84,106,.18);font-family:Georgia,serif;line-height:1}
+.quote-box p{font-size:14.8px;color:var(--ink-2);position:relative;margin-left:28px;margin-bottom:10px}
+.quote-box .q-by{font-size:13px;font-weight:700;color:var(--pink-dark);margin-left:28px}
+/* 页尾 */
+.site-footer{background:#2b2024;color:#d9c9ce;margin-top:44px;padding:36px 0 20px;font-size:13.5px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:26px;margin-bottom:24px}
+.site-footer h4{color:#fff;font-size:14px;margin-bottom:10px;letter-spacing:.5px}
+.site-footer .f-brand{display:flex;align-items:center;gap:9px;color:#fff;font-weight:900;font-size:19px;margin-bottom:8px}
+.site-footer .f-brand svg{width:30px;height:30px}
+.site-footer p{color:#b9a4aa;font-size:13px;margin:0 0 8px}
+.f-links{list-style:none;margin:0;padding:0}
+.f-links li{margin-bottom:6px}
+.f-links a{color:#c9b6bb;transition:.2s}
+.f-links a:hover{color:#fff;text-decoration:underline}
+.footer-bottom{border-top:1px solid #43353a;padding-top:14px;font-size:12px;color:#a08d93;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+/* ===== 响应式 ===== */
+@media(max-width:1100px){
+  .layout{grid-template-columns:1fr 250px}
+  .channel-col{display:none}
+  .channel-mobile{display:block}
+}
+@media(max-width:1024px){
+  .hero .container{grid-template-columns:1fr}
+  .hero-visual{min-height:250px;max-width:440px}
+  .hero h1{font-size:38px}
+  .card-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  :root{--head-h:100px}
+}
+@media(max-width:860px){
+  .layout{grid-template-columns:1fr}
+  .aux-col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+}
+@media(max-width:740px){
+  body{font-size:15px}
+  .main-nav{order:4;width:100%;overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px;margin-left:0}
+  .main-nav a{white-space:nowrap}
+  .top-tools{margin-left:auto;width:100%;order:5;justify-content:space-between}
+  .search-box{flex:1;margin-right:8px}
+  .search-box input{width:100%}
+  .site-header .container{min-height:auto;padding-top:10px;padding-bottom:10px;gap:10px}
+  :root{--head-h:150px}
+  .hero h1{font-size:30px}
+  .hero .container{padding-top:26px;padding-bottom:30px}
+  .hero-visual{min-height:210px;max-width:100%}
+  .card-grid{grid-template-columns:1fr}
+  .cat-grid{grid-template-columns:1fr 1fr}
+  .comment-grid{grid-template-columns:1fr}
+  .aux-col{grid-template-columns:1fr}
+  .news-item{grid-template-columns:110px 1fr}
+  .article-box{padding:20px 18px}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .update-list .up-time{width:56px}
+  .sec-head h2{font-size:18.5px}
+  .overview{padding:18px 16px}
+  .notice-bar .container{min-height:auto;padding-top:6px;padding-bottom:6px;font-size:12.5px}
+}
+@media(max-width:420px){
+  .container{padding:0 14px}
+  .cat-grid{grid-template-columns:1fr}
+  .hero-actions .btn{padding:9px 16px;font-size:13.5px}
+}
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<!-- 吸顶公告 + 页头 -->
+<div class="sticky-wrap">
+  <div class="notice-bar">
+    <div class="container">
+      <span class="notice-tag">更新速递</span>
+      <span>本周新增 12 部短剧、4 档综艺新期，<a href="#updates">《晚风知我意》第 18 集已上线</a>，<a href="#rank">口碑榜同步刷新</a></span>
+    </div>
+  </div>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="#top" aria-label="蜜桃视频首页">
+        <svg viewBox="0 0 40 40" aria-hidden="true">
+          <rect width="40" height="40" rx="11" fill="#e8546a"/>
+          <path d="M20 9c5 3.8 8.6 7.4 8.6 12.4A8.6 8.6 0 1 1 11.4 21.4C11.4 16.4 15 12.8 20 9z" fill="#ffe3e8"/>
+          <path d="M20 14v11M20 19l-3.6 2.4M20 19l3.6 2.4" stroke="#e8546a" stroke-width="1.9" fill="none" stroke-linecap="round"/>
+        </svg>
+        <span>蜜桃视频<span class="brand-sub">PEACH VIDEO</span></span>
+      </a>
+      <nav class="main-nav" aria-label="主题频道导航">
+        <a href="#channel">频道</a>
+        <a href="#picks">剧集精选</a>
+        <a href="#updates">更新动态</a>
+        <a href="#category">分类</a>
+        <a href="#deep">类型解析</a>
+        <a href="#guide">观看路径</a>
+        <a href="#comments">观众评论</a>
+        <a href="#news">资讯</a>
+      </nav>
+      <div class="top-tools">
+        <form class="search-box" role="search" onsubmit="return false;">
+          <input id="siteSearch" type="search" placeholder="搜剧名 / 类型 / 标签" aria-label="站内内容查找">
+          <button type="button" id="searchBtn">查找</button>
+        </form>
+        <a class="quick-link" href="#picks">今日上新</a>
+      </div>
+    </div>
+  </header>
+</div>
+
+<!-- 首屏 -->
+<section class="hero" id="top">
+  <div class="container">
+    <div class="hero-text">
+      <span class="hero-tag">都市情感 · 古装权谋 · 悬疑短剧 · 综艺真人秀</span>
+      <h1>蜜桃视频</h1>
+      <p class="hero-desc">汇聚都市情感剧、古装权谋、悬疑短剧、家庭伦理长剧与生活类短视频的内容聚合入口，按剧集、综艺、短片三条线整理分集更新、口碑评分、类型看点与上新时间，方便按题材和时长挑选下一部要追的内容。</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#picks">查看本周精选剧集</a>
+        <a class="btn btn-ghost" href="#category">按类型找片</a>
+      </div>
+      <div class="hero-stats">
+        <div><strong>186</strong>在架剧集</div>
+        <div><strong>42</strong>档在播综艺</div>
+        <div><strong>1,240+</strong>生活短视频</div>
+        <div><strong>4.6</strong>平均观众评分</div>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="hv-card hv-1">
+        <img src="https://picsum.photos/seed/mitao-wanfeng18/400/300" width="400" height="300" alt="都市情感剧《晚风知我意》剧照">
+        <span class="hv-label">晚风知我意 · 第18集</span>
+      </div>
+      <div class="hv-card hv-2">
+        <img src="https://picsum.photos/seed/mitao-changanmi/400/300" width="400" height="300" alt="古装权谋剧《长安密诏》剧照">
+        <span class="hv-label">长安密诏 · 权谋线</span>
+      </div>
+      <div class="hv-card hv-3">
+        <img src="https://picsum.photos/seed/mitao-wuyeshiji/400/300" width="400" height="300" alt="悬疑短剧《午夜信号》剧照">
+        <span class="hv-label">午夜信号 · 悬疑短剧</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div id="searchTip" class="search-result-tip" role="status" aria-live="polite"></div>
+</div>
+
+<!-- 主内容：三栏门户 -->
+<div class="container layout">
+
+  <!-- 左频道索引 -->
+  <aside class="channel-col" id="channel" aria-label="频道索引">
+    <div class="side-card">
+      <h3>内容频道</h3>
+      <ul class="channel-list">
+        <li><a href="#picks"><span class="dot"></span>都市情感<span class="cnt">38</span></a></li>
+        <li><a href="#picks"><span class="dot"></span>古装权谋<span class="cnt">26</span></a></li>
+        <li><a href="#picks"><span class="dot"></span>悬疑短剧<span class="cnt">31</span></a></li>
+        <li><a href="#picks"><span class="dot"></span>家庭伦理<span class="cnt">22</span></a></li>
+        <li><a href="#picks"><span class="dot"></span>青春校园<span class="cnt">19</span></a></li>
+        <li><a href="#category"><span class="dot"></span>综艺真人秀<span class="cnt">42</span></a></li>
+        <li><a href="#category"><span class="dot"></span>生活短视频<span class="cnt">1240</span></a></li>
+        <li><a href="#category"><span class="dot"></span>美食纪录<span class="cnt">18</span></a></li>
+        <li><a href="#category"><span class="dot"></span>职场观察<span class="cnt">14</span></a></li>
+        <li><a href="#rank"><span class="dot"></span>口碑榜单<span class="cnt">—</span></a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- 中主内容 -->
+  <main class="main-col">
+
+    <!-- 01 主题概览 -->
+    <section class="section" id="overview">
+      <div class="sec-head"><h2>内容版图：长剧、短剧与综艺怎么分</h2></div>
+      <div class="overview">
+        <p><strong>蜜桃视频</strong>所覆盖的内容大体分三条线。第一条是长剧集，单集 40—45 分钟，主打都市情感与家庭伦理，更新节奏多为每周 4 集，适合晚间连续追看；第二条是单集 8—15 分钟的竖屏短剧，题材集中在悬疑、复仇、单元反转，一季 20—30 集可在两三个晚上看完；第三条是综艺与生活短视频，前者按周更新，后者以 1—3 分钟的生活记录、探店、手作内容为主，适合碎片时间。</p>
+        <p>当前值得关注的方向有几个。都市情感线里，《晚风知我意》《余生有约》走的是职场与旧情重逢路线，冲突集中在前 6 集；古装权谋线以《长安密诏》《凤仪台》为代表，看点在群像与朝堂博弈，前两集信息量大，需要留意人物关系；悬疑短剧《午夜信号》《第七个证人》采用单集一反转的结构，适合不想投入长线时间的观众。综艺方面，《山海厨房》《城市漫游记》属于慢节奏真人秀，而《职场观察室》更偏话题讨论。</p>
+        <p>从观看成本看，长剧适合固定时段追更，短剧适合一次连刷，综艺适合边做事边看。判断一部内容是否值得投入，通常看三点：前两集是否建立清晰的人物动机、单集结尾是否留有有效钩子、以及口碑评分是否在 4.2 分以上。这三条对短剧尤其明显，因为短剧没有足够篇幅慢慢铺陈。</p>
+      </div>
+    </section>
+
+    <!-- 02 精选推荐 -->
+    <section class="section" id="picks">
+      <div class="sec-head">
+        <h2>本周精选剧集与综艺</h2>
+        <a class="sec-more" href="#rank">看口碑榜 →</a>
+      </div>
+      <p class="sec-lead">按题材、更新节奏与口碑挑选的本周可看条目，均标注类型与当前进度。</p>
+      <div class="card-grid" id="pickGrid">
+
+        <article class="card">
+          <img class="thumb" src="https://picsum.photos/seed/mitao-wanfeng/400/300" width="400" height="300" loading="lazy" alt="都市情感剧《晚风知我意》封面">
+          <div class="card-body">
+            <span class="type-tag">都市情感</span>
+            <h3><a href="#updates">晚风知我意</a></h3>
+            <p class="desc">广告公司中层与旧友重逢后重新审视职业选择，前六集把职场冲突和感情线并排放，节奏偏稳，适合喜欢现实题材的观众。</p>
+            <div class="tag-row"><span class="mini-tag">职场</span><span class="mini-tag">重逢</span><span class="mini-tag">40分钟/集</span></div>
+            <div class="card-foot"><span>更新至 18 集</span><span class="score">4.7</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img class="thumb" src="https://picsum.photos/seed/mitao-changan/400/300" width="400" height="300" loading="lazy" alt="古装权谋剧《长安密诏》封面">
+          <div class="card-body">
+            <span class="type-tag">古装权谋</span>
+            <h3><a href="#deep">长安密诏</a></h3>
+            <p class="desc">以一份失踪密诏牵出三方势力，群像戏比重高，第二集起人物关系密集，建议先看清阵营再看朝堂对峙段落。</p>
+            <div class="tag-row"><span class="mini-tag">群像</span><span class="mini-tag">朝堂</span><span class="mini-tag">45分钟/集</span></div>
+            <div class="card-foot"><span>更新至 24 集</span><span class="score">4.6</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img class="thumb" src="https://picsum.photos/seed/mitao-wuye/400/300" width="400" height="300" loading="lazy" alt="悬疑短剧《午夜信号》封面">
+          <div class="card-body">
+            <span class="type-tag">悬疑短剧</span>
+            <h3><a href="#deep">午夜信号</a></h3>
+            <p class="desc">深夜电台接到一段无法追溯来源的求助录音，每集用一条新线索推进，单集 12 分钟，适合一次连刷五六集。</p>
+            <div class="tag-row"><span class="mini-tag">单元反转</span><span class="mini-tag">电台</span><span class="mini-tag">12分钟/集</span></div>
+            <div class="card-foot"><span>全 24 集已上线</span><span class="score">4.5</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img class="thumb" src="https://picsum.photos/seed/mitao-fengyi/400/300" width="400" height="300" loading="lazy" alt="古装剧《凤仪台》封面">
+          <div class="card-body">
+            <span class="type-tag">古装权谋</span>
+            <h3><a href="#deep">凤仪台</a></h3>
+            <p class="desc">以女官视角切入宫廷权力更迭，台词密度高，服化道偏写实，喜欢慢热型权谋的观众接受度更高。</p>
+            <div class="tag-row"><span class="mini-tag">女官</span><span class="mini-tag">群像</span><span class="mini-tag">慢热</span></div>
+            <div class="card-foot"><span>更新至 16 集</span><span class="score">4.4</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img class="thumb" src="https://picsum.photos/seed/mitao-yusheng/400/300" width="400" height="300" loading="lazy" alt="家庭伦理剧《余生有约》封面">
+          <div class="card-body">
+            <span class="type-tag">家庭伦理</span>
+            <h3><a href="#updates">余生有约</a></h3>
+            <p class="desc">三代人围绕老宅处置产生的分歧，冲突集中在家庭会议场景，适合喜欢生活流叙事、不追求强情节的观众。</p>
+            <div class="tag-row"><span class="mini-tag">家庭</span><span class="mini-tag">生活流</span><span class="mini-tag">42分钟/集</span></div>
+            <div class="card-foot"><span>更新至 32 集</span><span class="score">4.3</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img class="thumb" src="https://picsum.photos/seed/mitao-diqige/400/300" width="400" height="300" loading="lazy" alt="悬疑短剧《第七个证人》封面">
+          <div class="card-body">
+            <span class="type-tag">悬疑短剧</span>
+            <h3><a href="#updates">第七个证人</a></h3>
+            <p class="desc">一起旧案重启后六名证人说法互相矛盾，剧集把审讯室对话作为主要推进手段，信息量大，适合边看边记线索。</p>
+            <div class="tag-row"><span class="mini-tag">审讯</span><span class="mini-tag">旧案</span><span class="mini-tag">10分钟/集</span></div>
+            <div class="card-foot"><span>更新至 12 集</span><span class="score">4.6</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img class="thumb" src="https://picsum.photos/seed/mitao-shanhai/400/300" width="400" height="300" loading="lazy" alt="美食慢综艺《山海厨房》封面">
+          <div class="card-body">
+            <span class="type-tag">综艺真人秀</span>
+            <h3><a href="#category">山海厨房</a></h3>
+            <p class="desc">六位常驻嘉宾在沿海小城经营一间限时餐馆，每期围绕一种本地食材展开，节奏舒缓，适合边做饭边看。</p>
+            <div class="tag-row"><span class="mini-tag">美食</span><span class="mini-tag">慢综艺</span><span class="mini-tag">周更</span></div>
+            <div class="card-foot"><span>更新至第 7 期</span><span class="score">4.5</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img class="thumb" src="https://picsum.photos/seed/mitao-chengshi/400/300" width="400" height="300" loading="lazy" alt="旅行真人秀《城市漫游记》封面">
+          <div class="card-body">
+            <span class="type-tag">综艺真人秀</span>
+            <h3><a href="#category">城市漫游记</a></h3>
+            <p class="desc">每期由两位嘉宾用一天时间徒步一座城市的老城区，路线由本地居民推荐，看点在街巷细节而非任务冲突。</p>
+            <div class="tag-row"><span class="mini-tag">旅行</span><span class="mini-tag">城市</span><span class="mini-tag">周更</span></div>
+            <div class="card-foot"><span>更新至第 9 期</span><span class="score">4.4</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <img class="thumb" src="https://picsum.photos/seed/mitao-zhichang/400/300" width="400" height="300" loading="lazy" alt="职场观察综艺《职场观察室》封面">
+          <div class="card-body">
+            <span class="type-tag">职场观察</span>
+            <h3><a href="#category">职场观察室</a></h3>
+            <p class="desc">记录四组不同行业新人的前三个月工作状态，观察室环节由从业者点评，话题集中在沟通方式与岗位匹配度。</p>
+            <div class="tag-row"><span class="mini-tag">职场</span><span class="mini-tag">观察室</span><span class="mini-tag">话题</span></div>
+            <div class="card-foot"><span>更新至第 5 期</span><span class="score">4.2</span></div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- 03 更新动态 -->
+    <section class="section" id="updates">
+      <div class="sec-head"><h2>最新更新与上线动态</h2></div>
+      <ul class="update-list">
+        <li><span class="up-time">今天 10:00</span><div><span class="up-name"><a href="#picks">晚风知我意</a><span class="up-badge">更新</span></span><p class="up-txt">第 18 集上线，本集围绕项目竞标与旧同事碰面展开，感情线推进到摊牌前的僵持阶段。</p></div></li>
+        <li><span class="up-time">今天 09:20</span><div><span class="up-name"><a href="#picks">午夜信号</a><span class="up-badge">完结</span></span><p class="up-txt">全 24 集已全部上线，最后三集收束了电台录音的来源，结局解释较为完整。</p></div></li>
+        <li><span class="up-time">昨天 21:10</span><div><span class="up-name"><a href="#picks">长安密诏</a><span class="up-badge">更新</span></span><p class="up-txt">第 24 集上线，密诏第一份副本现世，三方阵营在本集首次同场对峙。</p></div></li>
+        <li><span class="up-time">昨天 20:00</span><div><span class="up-name"><a href="#category">山海厨房</a><span class="up-badge">更新</span></span><p class="up-txt">第 7 期上线，本期食材为本地紫菜，嘉宾需要在一天内完成三桌出餐。</p></div></li>
+        <li><span class="up-time">11 月 6 日</span><div><span class="up-name"><a href="#picks">第七个证人</a><span class="up-badge">更新</span></span><p class="up-txt">第 12 集上线，第六名证人的证词出现时间矛盾，审讯节奏加快。</p></div></li>
+        <li><span class="up-time">11 月 5 日</span><div><span class="up-name"><a href="#category">城市漫游记</a><span class="up-badge">更新</span></span><p class="up-txt">第 9 期上线，本期路线为老码头至旧市场，全程步行约十一公里。</p></div></li>
+        <li><span class="up-time">11 月 4 日</span><div><span class="up-name"><a href="#picks">凤仪台</a><span class="up-badge">更新</span></span><p class="up-txt">第 16 集上线，女官调任后的第一条线索指向内务府账目。</p></div></li>
+        <li><span class="up-time">11 月 3 日</span><div><span class="up-name"><a href="#picks">余生有约</a><span class="up-badge">更新</span></span><p class="up-txt">第 32 集上线，老宅处置的家庭会议进入第二轮，三方意见仍未统一。</p></div></li>
+        <li><span class="up-time">11 月 2 日</span><div><span class="up-name"><a href="#category">职场观察室</a><span class="up-badge">更新</span></span><p class="up-txt">第 5 期上线，观察室讨论聚焦新人第一次独立汇报的准备方式。</p></div></li>
+        <li><span class="up-time">10 月 31 日</span><div><span class="up-name"><a href="#news">新剧《春深不知处》定档</a><span class="up-badge">预告</span></span><p class="up-txt">都市情感新剧定档 11 月 14 日首播，前两集将同步上线，主打双线叙事。</p></div></li>
+      </ul>
+    </section>
+
+    <!-- 04 分类入口 -->
+    <section class="section" id="category">
+      <div class="sec-head"><h2>按类型入口查找</h2></div>
+      <p class="sec-lead">分类名称对应用户常用搜索词，点击进入对应内容集合。</p>
+      <div class="cat-grid">
+        <a class="cat-card" href="#picks"><strong>都市情感</strong><span>职场、重逢、婚姻线 · 38 部</span></a>
+        <a class="cat-card" href="#picks"><strong>古装权谋</strong><span>朝堂、群像、女官线 · 26 部</span></a>
+        <a class="cat-card" href="#picks"><strong>悬疑短剧</strong><span>单元反转、旧案、审讯 · 31 部</span></a>
+        <a class="cat-card" href="#picks"><strong>家庭伦理</strong><span>代际、老宅、生活流 · 22 部</span></a>
+        <a class="cat-card" href="#picks"><strong>青春校园</strong><span>成长、社团、毕业季 · 19 部</span></a>
+        <a class="cat-card" href="#category"><strong>综艺真人秀</strong><span>慢综艺、旅行、观察室 · 42 档</span></a>
+        <a class="cat-card" href="#category"><strong>生活短视频</strong><span>探店、手作、日常记录 · 1,240 条</span></a>
+        <a class="cat-card" href="#category"><strong>美食纪录</strong><span>地方食材、厨房纪实 · 18 部</span></a>
+      </div>
+    </section>
+
+    <!-- 05 深度解析 -->
+    <section class="section" id="deep">
+      <div class="sec-head"><h2>类型差异与观看判断：长剧与短剧的实际区别</h2></div>
+      <div class="article-box">
+        <h3>都市情感剧的常见结构与判断点</h3>
+        <p>都市情感剧通常把职场线与感情线并置，前 6 集负责建立人物处境，中段用项目或家庭事件制造外部压力，后段回收人物关系。判断一部是否值得追，可以看前两集有没有把主角的处境讲清楚——如果两集过去观众仍不知道主角在为什么事焦虑，后面的冲突很难产生代入。</p>
+        <p>以《晚风知我意》为例，第一集用一场失败的提案交代了主角的职业瓶颈，第二集引入旧友，两条线在第三集交汇。这种处理让观众在进入感情线之前已经理解人物的动机，属于比较稳的开局方式。《余生有约》则走家庭路线，冲突来自老宅处置，节奏更慢，适合喜欢生活细节的观众。</p>
+
+        <h3>古装权谋剧的群像与信息密度</h3>
+        <p>古装权谋的核心难点是人物多、阵营杂。《长安密诏》在第二集就同时出现三方势力，如果按顺序看容易混乱，比较实用的做法是先记住每方一个代表人物，再顺着密诏这条主线往下看。《凤仪台》以女官视角切入，台词密度更高，信息多藏在对话里，倍速观看容易漏掉关键线索。</p>
+        <ul>
+          <li><strong>低信息密度权谋</strong>：冲突靠事件推动，人物关系相对简单，适合入门。</li>
+          <li><strong>高信息密度权谋</strong>：冲突靠对话与立场变化推动，需要专注观看。</li>
+          <li><strong>群像型</strong>：单集内切换多个视角，主线推进较慢，但人物立体。</li>
+        </ul>
+
+        <h3>悬疑短剧的节奏与反转质量</h3>
+        <p>短剧受篇幅限制，通常采用单集一钩子的结构。《午夜信号》每集 12 分钟，用一条新录音推进，结尾必留悬念；《第七个证人》则把审讯室作为主场景，靠证词矛盾制造张力。判断短剧反转是否成立，看两点：新线索是否在前文有过铺垫，以及反转后人物动机是否仍然自洽。如果反转只靠新出现的信息硬转，观感会明显下降。</p>
+        <p>另外要注意短剧的收尾质量。不少短剧前段紧凑，最后两三集为了收线而集中解释，节奏突然变慢。选择时可以先看结局集的口碑，再决定是否投入时间。</p>
+
+        <h3>综艺与短视频的观看场景</h3>
+        <p>慢综艺如《山海厨房》《城市漫游记》适合边做事边看，信息密度低，不依赖连续观看；观察类综艺如《职场观察室》话题性强，适合看完后讨论。生活短视频单条 1—3 分钟，适合通勤或排队时浏览，但内容之间关联弱，不适合连续追看。</p>
+      </div>
+    </section>
+
+    <!-- 06 观看路径 -->
+    <section class="section" id="guide">
+      <div class="sec-head"><h2>内容消费顺序：先看什么、怎么比较</h2></div>
+      <div class="path-steps">
+        <div class="path-step">
+          <div>
+            <h3>先按可用时间选长度</h3>
+            <p>每晚只有半小时左右，优先选 10—15 分钟的悬疑短剧；有整块时间再考虑 40 分钟以上的长剧，避免追到一半因时间不足弃剧。</p>
+          </div>
+        </div>
+        <div class="path-step">
+          <div>
+            <h3>用前两集判断是否继续</h3>
+            <p>长剧看前两集是否交代清楚主角处境，短剧看前两集的反转是否有铺垫。两集之内没有建立有效钩子，后续大概率也不会明显改善。</p>
+          </div>
+        </div>
+        <div class="path-step">
+          <div>
+            <h3>同类条目横向比较</h3>
+            <p>同为古装权谋，比较人物数量、单集信息量和主线清晰度；同为悬疑短剧，比较反转铺垫与结局收束。评分接近时，优先选单集更短、结构更清楚的一部。</p>
+          </div>
+        </div>
+        <div class="path-step">
+          <div>
+            <h3>确认更新状态再投入</h3>
+            <p>已完结的条目适合一次连刷，更新中的条目要确认周更集数是否稳定。追更中的剧如果更新间隔过长，建议等积累到一定集数再开始。</p>
+          </div>
+        </div>
+        <div class="path-step">
+          <div>
+            <h3>按情绪需求补充综艺与短视频</h3>
+            <p>需要放松时选慢综艺或美食纪录，需要话题时选观察类综艺。生活短视频适合填补碎片时间，但不建议作为主要观看内容。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 FAQ -->
+    <section class="section" id="faq">
+      <div class="sec-head"><h2>常见问题</h2></div>
+      <div class="faq-wrap">
+        <details open>
+          <summary>都市情感剧一般多久更新一次？</summary>
+          <div class="faq-a">多数都市情感长剧采用每周更新 4 集的节奏，分两次上线，单集 40—45 分钟。《晚风知我意》目前按周二、周五各更新两集推进，遇到节假日可能顺延一天，具体以条目页的更新时间为准。</div>
+        </details>
+        <details>
+          <summary>悬疑短剧和长剧的悬疑线有什么区别？</summary>
+          <div class="faq-a">短剧单集 10—15 分钟，通常一集一个钩子，靠高频反转推进；长剧的悬疑线往往与人物关系交织，铺垫更长，反转数量少但展开更充分。想看紧凑节奏选短剧，想看人物弧光选长剧的悬疑支线。</div>
+        </details>
+        <details>
+          <summary>《长安密诏》和《凤仪台》哪个更适合入门古装权谋？</summary>
+          <div class="faq-a">《长安密诏》冲突靠事件推动，阵营划分相对清楚，入门更容易；《凤仪台》台词密度高、信息藏在对话里，需要更专注地看。第一次接触古装权谋，建议从《长安密诏》前四集开始。</div>
+        </details>
+        <details>
+          <summary>第一次看悬疑短剧，从哪部开始比较好？</summary>
+          <div class="faq-a">可以从《午夜信号》开始，它单集 12 分钟、结构单元化，每集结尾都有明确钩子，不依赖大量前置信息。看完如果喜欢审讯类叙事，再接《第七个证人》会更顺。</div>
+        </details>
+        <details>
+          <summary>慢综艺和观察类综艺的观看体验有什么不同？</summary>
+          <div class="faq-a">慢综艺如《山海厨房》以过程和氛围为主，不需要连续关注；观察类综艺如《职场观察室》有明确话题和点评环节，更适合看完后讨论。前者适合放松，后者适合带着问题看。</div>
+        </details>
+        <details>
+          <summary>一部剧的口碑评分通常看哪些维度？</summary>
+          <div class="faq-a">常见维度包括剧情推进是否合理、人物动机是否自洽、制作完成度和结局收束质量。短剧还要额外看反转是否有铺垫。评分接近时，可以优先参考结局集和中期集数的评价，避免只看首集印象。</div>
+        </details>
+      </div>
+    </section>
+
+    <!-- 08 用户评论 -->
+    <section class="section" id="comments">
+      <div class="sec-head"><h2>观众评论</h2></div>
+      <div class="comment-grid">
+        <div class="comment"><div class="who"><span class="avatar">桃</span><span class="name">晚风追剧人</span><span class="date">今天 11:02</span></div><p>《晚风知我意》第 18 集终于把竞标结果放出来了，前面铺垫那么久，这集节奏明显加快，看着舒服。</p></div>
+        <div class="comment"><div class="who"><span class="avatar">林</span><span class="name">林间小满</span><span class="date">今天 10:15</span></div><p>《午夜信号》结局比预想稳，最后三集没有硬加新设定，录音来源的解释在前面其实埋过两次。</p></div>
+        <div class="comment"><div class="who"><span class="avatar">陈</span><span class="name">陈默看片</span><span class="date">今天 09:40</span></div><p>《长安密诏》人物太多了，我第二集就有点乱，后来按阵营记人名才顺下来。</p></div>
+        <div class="comment"><div class="who"><span class="avatar">阿</span><span class="name">阿柚不吃辣</span><span class="date">昨天 22:31</span></div><p>《山海厨房》这期紫菜那段拍得挺好，没有刻意煽情，就是安安静静做饭。</p></div>
+        <div class="comment"><div class="who"><span class="avatar">周</span><span class="name">周末补剧</span><span class="date">昨天 21:47</span></div><p>《第七个证人》第 12 集那个时间矛盾我回看了两遍，确实前面提过一句，不算硬转。</p></div>
+        <div class="comment"><div class="who"><span class="avatar">小</span><span class="name">小城故事多</span><span class="date">昨天 20:12</span></div><p>《城市漫游记》路线比上一季更接地气，老码头那段很想去走一次。</p></div>
+        <div class="comment"><div class="who"><span class="avatar">许</span><span class="name">许愿不加班</span><span class="date">11 月 7 日</span></div><p>《职场观察室》第 5 期讨论独立汇报，说的东西挺实在，不是空喊口号。</p></div>
+        <div class="comment"><div class="who"><span class="avatar">方</span><span class="name">方糖加冰</span><span class="date">11 月 7 日</span></div><p>《凤仪台》台词确实密，倍速看会漏，我改成正常速度之后理解顺多了。</p></div>
+        <div class="comment"><div class="who"><span class="avatar">沈</span><span class="name">沈家二丫</span><span class="date">11 月 6 日</span></div><p>《余生有约》家庭会议那几集有点拖，但人物反应挺真实的，不算难看。</p></div>
+        <div class="comment"><div class="who"><span class="avatar">顾</span><span class="name">顾南舟</span><span class="date">11 月 6 日</span></div><p>短剧的好处就是不占时间，一个晚上能刷完一部，比追长剧轻松。</p></div>
+        <div class="comment"><div class="who"><span class="avatar">唐</span><span class="name">唐小满</span><span class="date">11 月 5 日</span></div><p>《午夜信号》中间有几集反转有点重复套路，好在结局拉回来了。</p></div>
+        <div class="comment"><div class="who"><span class="avatar">钱</span><span class="name">钱多多看剧</span><span class="date">11 月 5 日</span></div><p>古装权谋我还是更喜欢群像，《长安密诏》配角戏份给得足，不全是主角独角戏。</p></div>
+        <div class="comment"><div class="who"><span class="avatar">何</span><span class="name">何处不相逢</span><span class="date">11 月 4 日</span></div><p>《晚风知我意》前六集节奏偏慢，第七集之后才渐入佳境，差点弃剧。</p></div>
+        <div class="comment"><div class="who"><span class="avatar">苏</span><span class="name">苏打水不加糖</span><span class="date">11 月 4 日</span></div><p>美食纪录比慢综艺更对我的胃口，信息多，节奏也不拖。</p></div>
+        <div class="comment"><div class="who"><span class="avatar">李</span><span class="name">李子树下</span><span class="date">11 月 3 日</span></div><p>《第七个证人》审讯室戏份集中，看久了有点闷，但线索确实清楚。</p></div>
+        <div class="comment"><div class="who"><span class="avatar">吴</span><span class="name">吴聊看片</span><span class="date">11 月 3 日</span></div><p>生活短视频刷起来挺快，不过内容之间没什么关联，刷完记不住几条。</p></div>
+      </div>
+    </section>
+
+    <!-- 09 相关资讯 -->
+    <section class="section" id="news">
+      <div class="sec-head"><h2>相关资讯</h2></div>
+      <div class="news-list">
+        <article class="news-item">
+          <img src="https://picsum.photos/seed/mitao-news-chunshen/600/400" width="600" height="400" loading="lazy" alt="都市情感新剧《春深不知处》定档消息配图">
+          <div class="news-body">
+            <h3><a href="#news">都市情感新剧《春深不知处》定档 11 月 14 日</a></h3>
+            <p><span class="news-date">11 月 7 日</span>该剧采用双线叙事，前两集将同步上线，主线围绕两代人的职业选择展开。</p>
+          </div>
+        </article>
+        <article class="news-item">
+          <img src="https://picsum.photos/seed/mitao-news-duanju/600/400" width="600" height="400" loading="lazy" alt="悬疑短剧季度上新情况配图">
+          <div class="news-body">
+            <h3><a href="#news">悬疑短剧本季度上新 11 部，单元结构成主流</a></h3>
+            <p><span class="news-date">11 月 6 日</span>新上架短剧中八部采用单集一反转结构，单集时长普遍压缩到 15 分钟以内。</p>
+          </div>
+        </article>
+        <article class="news-item">
+          <img src="https://picsum.photos/seed/mitao-news-fengyi/600/400" width="600" height="400" loading="lazy" alt="《凤仪台》加更安排配图">
+          <div class="news-body">
+            <h3><a href="#news">《凤仪台》调整更新节奏，下周起每周加更一集</a></h3>
+            <p><span class="news-date">11 月 5 日</span>调整后每周更新 5 集，原定 16 集后的剧情将提前进入朝堂对峙阶段。</p>
+          </div>
+        </article>
+        <article class="news-item">
+          <img src="https://picsum.photos/seed/mitao-news-shanhai/600/400" width="600" height="400" loading="lazy" alt="《山海厨房》取景地讨论配图">
+          <div class="news-body">
+            <h3><a href="#news">《山海厨房》取景地成讨论焦点，本地食材搜索量上升</a></h3>
+            <p><span class="news-date">11 月 4 日</span>第 6、7 期出现的两种本地食材在社区讨论中被反复提及，节目组暂未公布下期取景地。</p>
+          </div>
+        </article>
+        <article class="news-item">
+          <img src="https://picsum.photos/seed/mitao-news-wuye/600/400" width="600" height="400" loading="lazy" alt="《午夜信号》完结讨论配图">
+          <div class="news-body">
+            <h3><a href="#news">《午夜信号》完结，结局集讨论集中在录音来源解释</a></h3>
+            <p><span class="news-date">11 月 3 日</span>结局播出后，社区讨论主要围绕第二集埋下的细节是否构成有效铺垫。</p>
+          </div>
+        </article>
+        <article class="news-item">
+          <img src="https://picsum.photos/seed/mitao-news-zhichang/600/400" width="600" height="400" loading="lazy" alt="《职场观察室》话题讨论配图">
+          <div class="news-body">
+            <h3><a href="#news">《职场观察室》第 5 期话题转向新人汇报准备</a></h3>
+            <p><span class="news-date">11 月 2 日</span>本期观察室环节增加了从业者现场点评，讨论集中在汇报结构与信息取舍。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 10 相关推荐 -->
+    <section class="section" id="reco">
+      <div class="sec-head"><h2>延伸方向推荐</h2></div>
+      <p class="sec-lead">按题材细分、叙事方式和观看场景延伸的内容方向。</p>
+      <div class="reco-tags">
+        <a href="#picks">职场重逢题材</a>
+        <a href="#picks">朝堂群像权谋</a>
+        <a href="#picks">审讯室悬疑</a>
+        <a href="#picks">代际家庭叙事</a>
+        <a href="#category">慢节奏美食综艺</a>
+        <a href="#category">城市徒步旅行综艺</a>
+        <a href="#category">探店手作短视频</a>
+        <a href="#deep">单集反转结构分析</a>
+      </div>
+    </section>
+
+    <!-- 11 补充：热门榜单 -->
+    <section class="section" id="rank">
+      <div class="sec-head"><h2>口碑榜单（11 月 8 日更新）</h2></div>
+      <div class="card-grid" style="grid-template-columns:1fr 1fr;gap:16px">
+        <div class="side-card">
+          <h3>剧集口碑前五</h3>
+          <ul class="rank-list">
+            <li><span class="rank-no">1</span><div><a href="#picks">晚风知我意</a><span class="rank-meta">都市情感 · 4.7 分 · 更新至 18 集</span></div></li>
+            <li><span class="rank-no">2</span><div><a href="#picks">第七个证人</a><span class="rank-meta">悬疑短剧 · 4.6 分 · 更新至 12 集</span></div></li>
+            <li><span class="rank-no">3</span><div><a href="#picks">长安密诏</a><span class="rank-meta">古装权谋 · 4.6 分 · 更新至 24 集</span></div></li>
+            <li><span class="rank-no">4</span><div><a href="#picks">午夜信号</a><span class="rank-meta">悬疑短剧 · 4.5 分 · 已完结</span></div></li>
+            <li><span class="rank-no">5</span><div><a href="#picks">凤仪台</a><span class="rank-meta">古装权谋 · 4.4 分 · 更新至 16 集</span></div></li>
+          </ul>
+        </div>
+        <div class="side-card">
+          <h3>综艺热度前五</h3>
+          <ul class="rank-list">
+            <li><span class="rank-no">1</span><div><a href="#category">山海厨房</a><span class="rank-meta">美食慢综艺 · 4.5 分 · 第 7 期</span></div></li>
+            <li><span class="rank-no">2</span><div><a href="#category">城市漫游记</a><span class="rank-meta">旅行真人秀 · 4.4 分 · 第 9 期</span></div></li>
+            <li><span class="rank-no">3</span><div><a href="#category">职场观察室</a><span class="rank-meta">职场观察 · 4.2 分 · 第 5 期</span></div></li>
+            <li><span class="rank-no">4</span><div><a href="#category">一日三餐记</a><span class="rank-meta">生活纪录 · 4.1 分 · 第 11 期</span></div></li>
+            <li><span class="rank-no">5</span><div><a href="#category">周末去露营</a><span class="rank-meta">户外真人秀 · 4.0 分 · 第 4 期</span></div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 补充：时间线 + 证言 -->
+    <section class="section" id="timeline">
+      <div class="sec-head"><h2>近期上线时间线</h2></div>
+      <ul class="timeline">
+        <li><span class="tl-date">11 月 8 日</span><div class="tl-title">《晚风知我意》第 18 集上线</div><p class="tl-desc">竞标结果揭晓，感情线进入摊牌前阶段。</p></li>
+        <li><span class="tl-date">11 月 8 日</span><div class="tl-title">《午夜信号》全集完结</div><p class="tl-desc">24 集全部上线，录音来源在最后三集解释。</p></li>
+        <li><span class="tl-date">11 月 7 日</span><div class="tl-title">《春深不知处》宣布定档</div><p class="tl-desc">都市情感新剧定档 11 月 14 日，前两集同步上线。</p></li>
+        <li><span class="tl-date">11 月 6 日</span><div class="tl-title">《第七个证人》第 12 集上线</div><p class="tl-desc">第六名证人证词出现时间矛盾。</p></li>
+        <li><span class="tl-date">11 月 5 日</span><div class="tl-title">《凤仪台》宣布加更</div><p class="tl-desc">下周起每周更新 5 集。</p></li>
+      </ul>
+      <div class="quote-box" style="margin-top:20px">
+        <p>短剧最怕结尾收不住，前面抛的线太多，最后两集一集解释一堆，观感就塌了。所以我们做《午夜信号》时，第二集就把录音这条线的规则先定死。</p>
+        <div class="q-by">—— 悬疑短剧编剧 陆行舟（示例证言）</div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 右辅助栏 -->
+  <aside class="aux-col" aria-label="辅助栏">
+    <div class="side-card">
+      <h3>今日热度榜</h3>
+      <ul class="rank-list">
+        <li><span class="rank-no">1</span><div><a href="#picks">晚风知我意</a><span class="rank-meta">都市情感 · 热度 9,820</span></div></li>
+        <li><span class="rank-no">2</span><div><a href="#picks">午夜信号</a><span class="rank-meta">悬疑短剧 · 热度 9,140</span></div></li>
+        <li><span class="rank-no">3</span><div><a href="#picks">长安密诏</a><span class="rank-meta">古装权谋 · 热度 8,760</span></div></li>
+        <li><span class="rank-no">4</span><div><a href="#picks">第七个证人</a><span class="rank-meta">悬疑短剧 · 热度 8,210</span></div></li>
+        <li><span class="rank-no">5</span><div><a href="#category">山海厨房</a><span class="rank-meta">综艺 · 热度 7,950</span></div></li>
+        <li><span class="rank-no">6</span><div><a href="#picks">凤仪台</a><span class="rank-meta">古装权谋 · 热度 7,480</span></div></li>
+        <li><span class="rank-no">7</span><div><a href="#category">城市漫游记</a><span class="rank-meta">综艺 · 热度 6,930</span></div></li>
+        <li><span class="rank-no">8</span><div><a href="#picks">余生有约</a><span class="rank-meta">家庭伦理 · 热度 6,410</span></div></li>
+      </ul>
+    </div>
+    <div class="side-card">
+      <h3>更新提醒</h3>
+      <ul class="rank-list">
+        <li><span class="rank-no">·</span><div><a href="#updates">晚风知我意</a><span class="rank-meta">周二、周五各两集 · 今天 10:00 已更</span></div></li>
+        <li><span class="rank-no">·</span><div><a href="#updates">长安密诏</a><span class="rank-meta">每周三、周六 · 昨天 21:10 已更</span></div></li>
+        <li><span class="rank-no">·</span><div><a href="#updates">山海厨房</a><span class="rank-meta">每周六 20:00 · 昨天已更</span></div></li>
+        <li><span class="rank-no">·</span><div><a href="#updates">第七个证人</a><span class="rank-meta">每周一、周四 · 11 月 6 日已更</span></div></li>
+      </ul>
+    </div>
+    <div class="side-card">
+      <h3>类型快捷入口</h3>
+      <ul class="channel-list">
+        <li><a href="#picks"><span class="dot"></span>都市情感<span class="cnt">38</span></a></li>
+        <li><a href="#picks"><span class="dot"></span>古装权谋<span class="cnt">26</span></a></li>
+        <li><a href="#picks"><span class="dot"></span>悬疑短剧<span class="cnt">31</span></a></li>
+        <li><a href="#category"><span class="dot"></span>综艺真人秀<span class="cnt">42</span></a></li>
+      </ul>
+    </div>
+  </aside>
+
+</div>
+
+<!-- 页尾 -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="f-brand">
+          <svg viewBox="0 0 40 40" aria-hidden="true">
+            <rect width="40" height="40" rx="11" fill="#e8546a"/>
+            <path d="M20 9c5 3.8 8.6 7.4 8.6 12.4A8.6 8.6 0 1 1 11.4 21.4C11.4 16.4 15 12.8 20 9z" fill="#ffe3e8"/>
+            <path d="M20 14v11M20 19l-3.6 2.4M20 19l3.6 2.4" stroke="#e8546a" stroke-width="1.9" fill="none" stroke-linecap="round"/>
+          </svg>
+          蜜桃视频
+        </div>
+        <p>都市情感、古装权谋、悬疑短剧与慢综艺的内容聚合入口，按题材、时长和更新节奏整理可看条目。</p>
+      </div>
+      <div>
+        <h4>剧集频道</h4>
+        <ul class="f-links">
+          <li><a href="#picks">都市情感</a></li>
+          <li><a href="#picks">古装权谋</a></li>
+          <li><a href="#picks">悬疑短剧</a></li>
+          <li><a href="#picks">家庭伦理</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>综艺与短片</h4>
+        <ul class="f-links">
+          <li><a href="#category">综艺真人秀</a></li>
+          <li><a href="#category">美食纪录</a></li>
+          <li><a href="#category">生活短视频</a></li>
+          <li><a href="#category">职场观察</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>栏目导航</h4>
+        <ul class="f-links">
+          <li><a href="#deep">类型解析</a></li>
+          <li><a href="#guide">观看路径</a></li>
+          <li><a href="#faq">常见问题</a></li>
+          <li><a href="#rank">口碑榜单</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 蜜桃视频内容聚合示例 · 部分内容为示例数据，仅用于展示页面结构</span>
+      <span>内容更新基准时间：2026-11-08</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var input = document.getElementById('siteSearch');
+  var btn = document.getElementById('searchBtn');
+  var tip = document.getElementById('searchTip');
+  var scope = document.querySelector('.layout');
+  if(!input || !btn || !tip || !scope) return;
+
+  function reset(){
+    scope.querySelectorAll('.card, .update-list li, .news-item, .comment, .rank-list li, .timeline li').forEach(function(el){
+      el.style.display = '';
+    });
+    tip.style.display = 'none';
+    tip.textContent = '';
+  }
+
+  function run(){
+    var q = input.value.trim().toLowerCase();
+    if(!q){ reset(); return; }
+    var blocks = scope.querySelectorAll('.card, .update-list li, .news-item, .comment, .rank-list li, .timeline li');
+    var hit = 0;
+    blocks.forEach(function(el){
+      var text = (el.textContent || '').toLowerCase();
+      var alt = '';
+      var img = el.querySelector('img');
+      if(img && img.alt) alt = img.alt.toLowerCase();
+      if(text.indexOf(q) > -1 || alt.indexOf(q) > -1){
+        el.style.display = '';
+        hit++;
+      }else{
+        el.style.display = 'none';
+      }
+    });
+    tip.style.display = 'block';
+    if(hit === 0){
+      tip.textContent = '没有找到与“' + input.value.trim() + '”匹配的条目，可尝试“悬疑短剧”“都市情感”“综艺”等类型词。';
+    }else{
+      tip.textContent = '找到 ' + hit + ' 条与“' + input.value.trim() + '”相关的内容，已在本页高亮筛选。';
+    }
+  }
+
+  btn.addEventListener('click', run);
+  input.addEventListener('keydown', function(e){
+    if(e.key === 'Enter'){ e.preventDefault(); run(); }
+  });
+  input.addEventListener('input', function(){
+    if(input.value.trim() === ''){ reset(); }
+  });
+})();
+</script>
+</body>
+      </html>
