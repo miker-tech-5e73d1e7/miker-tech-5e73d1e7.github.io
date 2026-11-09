@@ -1,0 +1,1473 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mrds - 每日赛事与速通数据聚合</title>
+<meta name="description" content="mrds 聚合每日电竞与速通赛事入口，提供赛程时间表、选手速通纪录、规则变动说明、版本强度分析与观赛指南，适合追赛玩家与速通爱好者查阅。">
+<meta name="keywords" content="电竞赛程,速通纪录,版本更新,赛事规则,观赛指南">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1a2b'/%3E%3Cpath d='M14 44 L24 20 L32 36 L40 20 L50 44' stroke='%2334d399' stroke-width='5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#0b1220;
+  --bg-soft:#111c30;
+  --panel:#152238;
+  --panel-2:#1b2b45;
+  --line:#26374f;
+  --line-soft:#1e2c42;
+  --text:#e8eef7;
+  --text-2:#a9b8cd;
+  --text-3:#7d8ea6;
+  --brand:#34d399;
+  --brand-2:#22c55e;
+  --accent:#f5b942;
+  --accent-2:#f97362;
+  --blue:#5ba8f5;
+  --radius:12px;
+  --radius-sm:8px;
+  --shadow:0 8px 26px rgba(0,0,0,.28);
+  --maxw:1320px;
+  --stick:104px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:15px;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none;}
+img{display:block;max-width:100%;}
+h1,h2,h3,h4{margin:0;line-height:1.35;font-weight:700;}
+p{margin:0;}
+ul,ol{margin:0;padding:0;list-style:none;}
+button{font-family:inherit;}
+
+/* ---------- 吸顶公告条 ---------- */
+.announce{
+  position:sticky;top:0;z-index:60;
+  background:linear-gradient(90deg,#16324a,#122a3f 45%,#1d2a46);
+  border-bottom:1px solid var(--line);
+}
+.announce-inner{
+  max-width:var(--maxw);margin:0 auto;padding:8px 20px;
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  font-size:13px;color:#cfe0f2;
+}
+.announce-tag{
+  flex:none;background:var(--brand);color:#06281b;
+  font-weight:700;font-size:11.5px;letter-spacing:.5px;
+  padding:2px 9px;border-radius:999px;
+}
+.announce-list{display:flex;gap:20px;flex-wrap:wrap;}
+.announce-list li{display:flex;align-items:center;gap:6px;white-space:nowrap;}
+.announce-list b{color:var(--accent);font-weight:600;}
+.announce-more{margin-left:auto;color:var(--brand);font-weight:600;white-space:nowrap;}
+.announce-more:hover{text-decoration:underline;}
+
+/* ---------- 吸顶页头 ---------- */
+.site-header{
+  position:sticky;top:37px;z-index:55;
+  background:rgba(11,18,32,.94);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.header-inner{
+  max-width:var(--maxw);margin:0 auto;padding:12px 20px;
+  display:flex;align-items:center;gap:22px;
+}
+.brand{display:flex;align-items:center;gap:10px;flex:none;}
+.brand-mark{width:38px;height:38px;flex:none;}
+.brand-text{font-size:22px;font-weight:800;letter-spacing:1px;color:#fff;}
+.brand-text span{color:var(--brand);}
+.main-nav{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
+.main-nav a{
+  padding:6px 11px;border-radius:var(--radius-sm);
+  font-size:14px;color:var(--text-2);white-space:nowrap;
+  transition:.18s;
+}
+.main-nav a:hover,.main-nav a:focus-visible{background:var(--panel-2);color:#fff;outline:none;}
+.header-actions{display:flex;align-items:center;gap:10px;flex:none;}
+.search-box{
+  display:flex;align-items:center;gap:6px;
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:999px;padding:5px 6px 5px 12px;
+}
+.search-box input{
+  background:transparent;border:0;color:var(--text);
+  font-size:13px;width:132px;outline:none;
+}
+.search-box input::placeholder{color:var(--text-3);}
+.search-box button{
+  background:var(--brand);border:0;color:#06281b;font-weight:700;
+  font-size:12.5px;padding:5px 12px;border-radius:999px;cursor:pointer;
+}
+.search-box button:hover{background:#4ade80;}
+.menu-toggle{
+  display:none;background:var(--panel);border:1px solid var(--line);
+  color:var(--text);border-radius:var(--radius-sm);padding:7px 12px;
+  font-size:13px;cursor:pointer;
+}
+.menu-toggle:focus-visible{outline:2px solid var(--brand);outline-offset:2px;}
+
+/* 搜索反馈 */
+.search-feedback{
+  max-width:var(--maxw);margin:0 auto;padding:0 20px;
+}
+.search-feedback .sf-inner{
+  display:none;background:#2a1c22;border:1px solid #5c3540;
+  color:#ffd2cc;border-radius:0 0 var(--radius-sm) var(--radius-sm);
+  padding:8px 14px;font-size:13px;
+}
+.search-feedback.active .sf-inner{display:block;}
+
+/* ---------- 首屏 ---------- */
+.hero{
+  position:relative;overflow:hidden;
+  border-bottom:1px solid var(--line);
+  background:
+    radial-gradient(900px 380px at 82% -12%,rgba(52,211,153,.18),transparent 62%),
+    radial-gradient(700px 320px at 8% 108%,rgba(91,168,245,.14),transparent 60%),
+    var(--bg-soft);
+  scroll-margin-top:var(--stick);
+}
+.hero-inner{
+  max-width:var(--maxw);margin:0 auto;padding:52px 20px 46px;
+  display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
+  gap:44px;align-items:center;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12.5px;letter-spacing:2px;color:var(--brand);
+  border:1px solid rgba(52,211,153,.4);border-radius:999px;
+  padding:4px 14px;margin-bottom:18px;background:rgba(52,211,153,.07);
+}
+.hero h1{
+  font-size:clamp(38px,6vw,64px);letter-spacing:1px;
+  font-weight:800;color:#fff;margin-bottom:16px;
+}
+.hero h1 em{font-style:normal;color:var(--brand);}
+.hero-desc{
+  font-size:15.5px;color:var(--text-2);max-width:560px;margin-bottom:24px;
+}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px;}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 20px;border-radius:999px;font-size:14px;font-weight:600;
+  border:1px solid transparent;transition:.18s;
+}
+.btn-primary{background:var(--brand);color:#06281b;}
+.btn-primary:hover{background:#4ade80;transform:translateY(-1px);}
+.btn-ghost{border-color:var(--line);color:var(--text);background:var(--panel);}
+.btn-ghost:hover{border-color:var(--brand);color:var(--brand);}
+.hero-stats{display:flex;gap:30px;flex-wrap:wrap;}
+.hero-stats div strong{display:block;font-size:22px;color:#fff;font-weight:800;}
+.hero-stats div span{font-size:12.5px;color:var(--text-3);}
+
+/* 首屏 SVG 构图 */
+.hero-visual{position:relative;}
+.hero-visual svg{width:100%;height:auto;display:block;}
+
+/* ---------- 布局：三栏门户 ---------- */
+.layout{
+  max-width:var(--maxw);margin:0 auto;padding:32px 20px 60px;
+  display:grid;
+  grid-template-columns:178px minmax(0,1fr) 262px;
+  gap:26px;
+  align-items:start;
+}
+.channel-col{
+  position:sticky;top:var(--stick);align-self:start;
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--radius);padding:14px 12px;
+  scroll-margin-top:var(--stick);
+}
+.col-title{
+  font-size:12px;letter-spacing:2px;color:var(--text-3);
+  padding:0 6px 10px;border-bottom:1px solid var(--line-soft);margin-bottom:8px;
+}
+.channel-col ul li a{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:8px 8px;border-radius:var(--radius-sm);
+  font-size:13.5px;color:var(--text-2);transition:.16s;
+}
+.channel-col ul li a:hover,.channel-col ul li a:focus-visible{
+  background:var(--panel-2);color:#fff;outline:none;
+}
+.channel-col ul li a span{font-size:11.5px;color:var(--text-3);}
+.channel-col ul li a:hover span{color:var(--brand);}
+
+/* 主栏 */
+.main-col{min-width:0;display:flex;flex-direction:column;gap:26px;}
+.card-panel{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--radius);padding:22px;
+  scroll-margin-top:var(--stick);
+}
+.section-head{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:14px;margin-bottom:16px;flex-wrap:wrap;
+}
+.section-head h2{
+  font-size:20px;color:#fff;display:flex;align-items:center;gap:10px;
+}
+.section-head h2::before{
+  content:"";width:5px;height:19px;border-radius:3px;
+  background:linear-gradient(180deg,var(--brand),var(--blue));flex:none;
+}
+.section-head .sub{font-size:12.5px;color:var(--text-3);}
+.section-link{font-size:13px;color:var(--brand);white-space:nowrap;}
+.section-link:hover{text-decoration:underline;}
+
+/* 概览 */
+.overview p{color:var(--text-2);font-size:14.5px;margin-bottom:12px;}
+.overview p:last-child{margin-bottom:0;}
+.overview strong{color:var(--accent);font-weight:600;}
+
+/* 精选卡片 */
+.card-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));
+  gap:16px;
+}
+.content-card{
+  background:var(--panel-2);border:1px solid var(--line-soft);
+  border-radius:var(--radius-sm);overflow:hidden;
+  display:flex;flex-direction:column;transition:.2s;
+}
+.content-card:hover{border-color:rgba(52,211,153,.55);transform:translateY(-2px);}
+.content-card .thumb{position:relative;aspect-ratio:4/3;overflow:hidden;background:#0d1727;}
+.content-card .thumb img{width:100%;height:100%;object-fit:cover;transition:.35s;}
+.content-card:hover .thumb img{transform:scale(1.05);}
+.badge{
+  position:absolute;top:8px;left:8px;
+  background:rgba(6,24,18,.82);color:var(--brand);
+  font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;
+  border:1px solid rgba(52,211,153,.45);
+}
+.heat{
+  position:absolute;bottom:8px;right:8px;
+  background:rgba(6,14,26,.82);color:var(--accent);
+  font-size:11px;padding:2px 8px;border-radius:999px;
+}
+.card-body{padding:12px 13px 14px;display:flex;flex-direction:column;gap:8px;flex:1;}
+.card-body h3{font-size:15px;color:#fff;}
+.card-body .desc{font-size:12.8px;color:var(--text-2);line-height:1.65;flex:1;}
+.tags{display:flex;gap:6px;flex-wrap:wrap;}
+.tag{
+  font-size:11px;color:var(--text-2);background:rgba(91,168,245,.1);
+  border:1px solid rgba(91,168,245,.25);border-radius:999px;padding:1px 8px;
+}
+.tag.green{color:var(--brand);background:rgba(52,211,153,.1);border-color:rgba(52,211,153,.3);}
+
+/* 最新动态列表 */
+.update-list li{
+  display:flex;gap:12px;padding:11px 0;
+  border-bottom:1px dashed var(--line-soft);
+}
+.update-list li:last-child{border-bottom:0;padding-bottom:0;}
+.update-time{
+  flex:none;width:78px;font-size:12px;color:var(--text-3);
+  font-variant-numeric:tabular-nums;padding-top:2px;
+}
+.update-body{min-width:0;}
+.update-body strong{color:#fff;font-weight:600;font-size:14px;}
+.update-body p{font-size:13px;color:var(--text-2);margin-top:2px;}
+
+/* 分类入口 */
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;}
+.cat-item{
+  display:flex;flex-direction:column;gap:2px;
+  background:var(--panel-2);border:1px solid var(--line-soft);
+  border-radius:var(--radius-sm);padding:11px 13px;transition:.18s;
+}
+.cat-item:hover{border-color:var(--brand);background:#1e3049;}
+.cat-item b{font-size:14px;color:#fff;font-weight:600;}
+.cat-item span{font-size:11.5px;color:var(--text-3);}
+.cat-item:hover span{color:var(--brand);}
+
+/* 深度解析 */
+.deep h3{
+  font-size:16.5px;color:var(--brand);margin:20px 0 9px;
+  padding-left:11px;border-left:3px solid var(--brand);
+}
+.deep h3:first-of-type{margin-top:4px;}
+.deep p{font-size:14.3px;color:var(--text-2);margin-bottom:10px;}
+.deep ul{margin:6px 0 12px;padding-left:4px;}
+.deep ul li{
+  position:relative;padding-left:18px;font-size:14px;color:var(--text-2);
+  margin-bottom:6px;
+}
+.deep ul li::before{
+  content:"";position:absolute;left:4px;top:9px;width:6px;height:6px;
+  border-radius:50%;background:var(--brand);opacity:.75;
+}
+.deep .hl{color:var(--accent);font-weight:600;}
+
+/* 体验指南：编号步骤 */
+.steps{counter-reset:step;display:flex;flex-direction:column;gap:12px;}
+.step{
+  position:relative;padding:13px 16px 13px 52px;
+  background:var(--panel-2);border:1px solid var(--line-soft);
+  border-radius:var(--radius-sm);
+}
+.step::before{
+  counter-increment:step;content:counter(step,decimal-leading-zero);
+  position:absolute;left:14px;top:12px;
+  font-size:16px;font-weight:800;color:var(--brand);
+  font-variant-numeric:tabular-nums;
+}
+.step b{display:block;font-size:14px;color:#fff;margin-bottom:3px;}
+.step p{font-size:13px;color:var(--text-2);}
+
+/* FAQ */
+.faq-item{
+  border:1px solid var(--line-soft);border-radius:var(--radius-sm);
+  background:var(--panel-2);margin-bottom:9px;overflow:hidden;
+}
+.faq-item summary{
+  cursor:pointer;padding:12px 15px;font-size:14px;color:#fff;font-weight:600;
+  list-style:none;display:flex;justify-content:space-between;gap:10px;align-items:center;
+}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-item summary::after{
+  content:"+";color:var(--brand);font-size:18px;font-weight:400;flex:none;transition:.2s;
+}
+.faq-item[open] summary::after{transform:rotate(45deg);}
+.faq-item summary:focus-visible{outline:2px solid var(--brand);outline-offset:-2px;}
+.faq-item .faq-body{padding:0 15px 13px;font-size:13.4px;color:var(--text-2);}
+
+/* 评论 */
+.comment-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:11px;}
+.comment{
+  background:var(--panel-2);border:1px solid var(--line-soft);
+  border-radius:var(--radius-sm);padding:12px 13px;
+}
+.comment-top{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.avatar{
+  width:26px;height:26px;border-radius:50%;flex:none;
+  display:grid;place-items:center;font-size:11.5px;font-weight:700;color:#06281b;
+}
+.comment-top b{font-size:12.8px;color:#fff;font-weight:600;}
+.comment-top time{margin-left:auto;font-size:11px;color:var(--text-3);}
+.comment p{font-size:12.9px;color:var(--text-2);line-height:1.65;}
+
+/* 资讯 */
+.news-list{display:flex;flex-direction:column;gap:13px;}
+.news-item{
+  display:grid;grid-template-columns:104px minmax(0,1fr);gap:13px;
+  padding-bottom:13px;border-bottom:1px dashed var(--line-soft);
+}
+.news-item:last-child{border-bottom:0;padding-bottom:0;}
+.news-item .nthumb{aspect-ratio:4/3;border-radius:var(--radius-sm);overflow:hidden;background:#0d1727;}
+.news-item .nthumb img{width:100%;height:100%;object-fit:cover;}
+.news-item h3{font-size:14.4px;color:#fff;margin-bottom:3px;}
+.news-item .ndate{font-size:11.5px;color:var(--brand);margin-bottom:3px;font-variant-numeric:tabular-nums;}
+.news-item p{font-size:13px;color:var(--text-2);}
+
+/* 相关推荐 标签索引 */
+.rec-tags{display:flex;flex-wrap:wrap;gap:9px;}
+.rec-tag{
+  font-size:13px;color:var(--text-2);
+  background:var(--panel-2);border:1px solid var(--line-soft);
+  border-radius:999px;padding:6px 14px;transition:.16s;
+}
+.rec-tag:hover{border-color:var(--brand);color:var(--brand);background:#1c2f47;}
+
+/* 榜单 */
+.rank-list{counter-reset:rk;}
+.rank-list li{
+  counter-increment:rk;display:flex;align-items:center;gap:12px;
+  padding:10px 0;border-bottom:1px dashed var(--line-soft);
+}
+.rank-list li:last-child{border-bottom:0;}
+.rank-list li::before{
+  content:counter(rk);flex:none;width:24px;height:24px;border-radius:6px;
+  display:grid;place-items:center;font-size:12px;font-weight:800;
+  background:var(--panel-2);color:var(--text-3);font-variant-numeric:tabular-nums;
+}
+.rank-list li:nth-child(1)::before{background:var(--accent);color:#2a1b00;}
+.rank-list li:nth-child(2)::before{background:#cfd8e3;color:#1f2937;}
+.rank-list li:nth-child(3)::before{background:#c98a4b;color:#2a1500;}
+.rank-list .rname{flex:1;min-width:0;font-size:13.6px;color:#fff;}
+.rank-list .rname small{display:block;font-size:11.5px;color:var(--text-3);}
+.rank-list .rval{font-size:12.5px;color:var(--brand);font-variant-numeric:tabular-nums;}
+
+/* 右侧辅助栏 */
+.side-col{display:flex;flex-direction:column;gap:20px;min-width:0;}
+.side-panel{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--radius);padding:16px;
+}
+.side-panel h2{
+  font-size:14px;color:#fff;letter-spacing:.5px;margin-bottom:12px;
+  display:flex;align-items:center;gap:8px;
+}
+.side-panel h2::before{content:"";width:4px;height:14px;border-radius:2px;background:var(--brand);}
+.mini-rank li{
+  display:flex;gap:9px;align-items:baseline;padding:7px 0;
+  border-bottom:1px dashed var(--line-soft);font-size:13px;
+}
+.mini-rank li:last-child{border-bottom:0;}
+.mini-rank .idx{color:var(--brand);font-weight:700;font-size:12px;flex:none;width:16px;}
+.mini-rank .nm{flex:1;color:var(--text-2);min-width:0;}
+.mini-rank .nm b{color:#fff;font-weight:600;}
+.mini-rank .vl{font-size:11.5px;color:var(--accent);flex:none;}
+.side-note{font-size:12px;color:var(--text-3);line-height:1.7;}
+.side-links{display:flex;flex-wrap:wrap;gap:7px;}
+.side-links a{
+  font-size:12px;color:var(--text-2);background:var(--panel-2);
+  border:1px solid var(--line-soft);border-radius:6px;padding:4px 9px;
+}
+.side-links a:hover{color:var(--brand);border-color:var(--brand);}
+
+/* 时间线 */
+.timeline{position:relative;padding-left:18px;}
+.timeline::before{
+  content:"";position:absolute;left:4px;top:5px;bottom:5px;width:2px;
+  background:linear-gradient(180deg,var(--brand),var(--blue));opacity:.5;
+}
+.timeline li{position:relative;padding-bottom:13px;}
+.timeline li:last-child{padding-bottom:0;}
+.timeline li::before{
+  content:"";position:absolute;left:-18px;top:6px;width:9px;height:9px;
+  border-radius:50%;background:var(--bg);border:2px solid var(--brand);
+}
+.timeline b{display:block;font-size:13.4px;color:#fff;}
+.timeline span{font-size:12px;color:var(--text-3);}
+
+/* 页尾 */
+.site-footer{
+  border-top:1px solid var(--line);background:var(--bg-soft);
+  margin-top:20px;
+}
+.footer-inner{
+  max-width:var(--maxw);margin:0 auto;padding:38px 20px 20px;
+  display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:28px;
+}
+.footer-brand .brand{margin-bottom:10px;}
+.footer-brand p{font-size:13px;color:var(--text-3);line-height:1.8;}
+.footer-col h3{font-size:13px;color:#fff;margin-bottom:10px;letter-spacing:.5px;}
+.footer-col a{display:block;font-size:12.8px;color:var(--text-3);padding:3px 0;}
+.footer-col a:hover{color:var(--brand);}
+.footer-bottom{
+  border-top:1px solid var(--line-soft);
+  max-width:var(--maxw);margin:0 auto;padding:14px 20px 26px;
+  font-size:12px;color:var(--text-3);display:flex;justify-content:space-between;
+  gap:12px;flex-wrap:wrap;
+}
+
+/* 响应式 */
+@media (max-width:1120px){
+  .layout{grid-template-columns:170px minmax(0,1fr);}
+  .side-col{grid-column:1 / -1;flex-direction:row;flex-wrap:wrap;}
+  .side-col .side-panel{flex:1 1 260px;}
+}
+@media (max-width:1024px){
+  .hero-inner{grid-template-columns:1fr;gap:26px;}
+  .hero-visual{max-width:520px;}
+  .header-inner{flex-wrap:wrap;gap:12px;}
+  .main-nav{order:3;width:100%;flex-basis:100%;}
+  .menu-toggle{display:inline-block;}
+  .main-nav.collapsed{display:none;}
+  .footer-inner{grid-template-columns:1fr 1fr;}
+}
+@media (max-width:860px){
+  .layout{grid-template-columns:1fr;}
+  .channel-col{position:static;order:2;}
+  .main-col{order:1;}
+  .side-col{order:3;}
+  .channel-col ul{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:4px;}
+}
+@media (max-width:740px){
+  :root{--stick:96px;}
+  .announce-list li:nth-child(n+2){display:none;}
+  .header-inner{padding:10px 14px;gap:10px;}
+  .search-box input{width:96px;}
+  .hero-inner{padding:34px 14px 30px;}
+  .layout{padding:20px 14px 44px;gap:18px;}
+  .card-panel{padding:16px;}
+  .card-grid{grid-template-columns:1fr 1fr;gap:11px;}
+  .news-item{grid-template-columns:82px minmax(0,1fr);}
+  .comment-list{grid-template-columns:1fr;}
+  .side-col{flex-direction:column;}
+  .footer-inner{grid-template-columns:1fr;gap:20px;}
+  .hero-stats{gap:20px;}
+  .update-time{width:66px;font-size:11.5px;}
+}
+@media (max-width:420px){
+  .card-grid{grid-template-columns:1fr;}
+  .cat-grid{grid-template-columns:1fr 1fr;}
+  .main-nav a{padding:5px 8px;font-size:13px;}
+}
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<!-- 吸顶公告条 -->
+<div class="announce" id="announce">
+  <div class="announce-inner">
+    <span class="announce-tag">今日更新</span>
+    <ul class="announce-list">
+      <li><b>11-08</b> 冬季速通挑战赛新增 12 条纪录认证</li>
+      <li><b>11-08</b> 《暗潮回廊》Any% 规则修订生效</li>
+      <li><b>11-07</b> 星火杯小组赛程落定，8 强对阵公布</li>
+    </ul>
+    <a class="announce-more" href="#updates">查看全部动态 →</a>
+  </div>
+</div>
+
+<!-- 吸顶页头 -->
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="#top" aria-label="mrds 首页">
+      <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+        <rect width="64" height="64" rx="14" fill="#152238"/>
+        <path d="M14 44 L24 20 L32 36 L40 20 L50 44" stroke="#34d399" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="32" cy="48" r="3" fill="#f5b942"/>
+      </svg>
+      <span class="brand-text">mrds</span>
+    </a>
+    <nav class="main-nav" id="mainNav" aria-label="主题导航">
+      <a href="#overview">领域概览</a>
+      <a href="#picks">精选条目</a>
+      <a href="#updates">最新动态</a>
+      <a href="#categories">分类入口</a>
+      <a href="#deep">深度解析</a>
+      <a href="#guide">观赛指南</a>
+      <a href="#rank">热门榜单</a>
+      <a href="#faq">常见问答</a>
+      <a href="#news">相关资讯</a>
+    </nav>
+    <div class="header-actions">
+      <div class="search-box">
+        <input type="search" id="siteSearch" placeholder="搜索条目 / 选手 / 规则" aria-label="站内内容搜索">
+        <button type="button" id="searchBtn">查找</button>
+      </div>
+      <button type="button" class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainNav">频道</button>
+    </div>
+  </div>
+  <div class="search-feedback" id="searchFeedback">
+    <div class="sf-inner" id="sfInner">未找到匹配内容，试试“速通”“星火杯”“暗潮回廊”等词。</div>
+  </div>
+</header>
+
+<!-- 首屏 -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <span class="hero-eyebrow">每日赛事 · 速通纪录 · 规则变动</span>
+      <h1>mrds</h1>
+      <p class="hero-desc">
+        汇聚电竞小组赛与速通挑战赛的赛程时间表、选手纪录认证、版本强度变化与规则修订说明。追赛的观众可以按赛事查对阵，速通玩家可以按分类查纪录与方法差异。
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#updates">今日赛程与纪录</a>
+        <a class="btn btn-ghost" href="#deep">速通分类解析</a>
+      </div>
+      <div class="hero-stats">
+        <div><strong>68</strong><span>在办赛事</span></div>
+        <div><strong>1,240</strong><span>认证速通纪录</span></div>
+        <div><strong>23</strong><span>本周规则变动</span></div>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <svg viewBox="0 0 420 320" role="presentation">
+        <defs>
+          <linearGradient id="hgA" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#34d399" stop-opacity=".45"/>
+            <stop offset="1" stop-color="#5ba8f5" stop-opacity=".12"/>
+          </linearGradient>
+          <linearGradient id="hgB" x1="0" y1="1" x2="1" y2="0">
+            <stop offset="0" stop-color="#f5b942" stop-opacity=".5"/>
+            <stop offset="1" stop-color="#f97362" stop-opacity=".08"/>
+          </linearGradient>
+        </defs>
+        <rect x="8" y="8" width="404" height="304" rx="18" fill="#101c2e" stroke="#26374f"/>
+        <g stroke="#243650" stroke-width="1">
+          <line x1="8" y1="88" x2="412" y2="88"/>
+          <line x1="8" y1="168" x2="412" y2="168"/>
+          <line x1="8" y1="248" x2="412" y2="248"/>
+        </g>
+        <path d="M28 250 L76 196 L118 214 L166 150 L214 178 L262 108 L312 138 L392 62"
+              fill="none" stroke="url(#hgA)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        <g fill="#34d399">
+          <circle cx="76" cy="196" r="4"/>
+          <circle cx="166" cy="150" r="4"/>
+          <circle cx="262" cy="108" r="4"/>
+          <circle cx="392" cy="62" r="5.5"/>
+        </g>
+        <g>
+          <rect x="28" y="30" width="118" height="34" rx="8" fill="#152238" stroke="#2c405c"/>
+          <text x="44" y="52" font-size="12" fill="#a9b8cd" font-family="sans-serif">星火杯 · 8 强</text>
+          <rect x="272" y="30" width="120" height="34" rx="8" fill="#152238" stroke="#2c405c"/>
+          <text x="286" y="52" font-size="12" fill="#f5b942" font-family="sans-serif">Any% 01:48:22</text>
+        </g>
+        <g>
+          <rect x="28" y="272" width="86" height="22" rx="6" fill="url(#hgB)"/>
+          <text x="38" y="287" font-size="11" fill="#ffe6c2" font-family="sans-serif">冬季速通</text>
+          <rect x="126" y="272" width="86" height="22" rx="6" fill="#152238" stroke="#2c405c"/>
+          <text x="136" y="287" font-size="11" fill="#a9b8cd" font-family="sans-serif">100% 收录</text>
+          <rect x="224" y="272" width="86" height="22" rx="6" fill="#152238" stroke="#2c405c"/>
+          <text x="234" y="287" font-size="11" fill="#a9b8cd" font-family="sans-serif">Glitchless</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- 主体：三栏门户 -->
+<div class="layout">
+
+  <!-- 左频道索引 -->
+  <aside class="channel-col" id="channels" aria-label="频道索引">
+    <div class="col-title">频道索引</div>
+    <ul>
+      <li><a href="#picks">速通纪录 <span>312</span></a></li>
+      <li><a href="#picks">电竞赛程 <span>68</span></a></li>
+      <li><a href="#updates">规则修订 <span>23</span></a></li>
+      <li><a href="#deep">版本强度 <span>14</span></a></li>
+      <li><a href="#categories">Any% 分类 <span>96</span></a></li>
+      <li><a href="#categories">100% 通关 <span>74</span></a></li>
+      <li><a href="#rank">选手榜 <span>40</span></a></li>
+      <li><a href="#rank">战队榜 <span>24</span></a></li>
+      <li><a href="#news">赛事资讯 <span>18</span></a></li>
+      <li><a href="#faq">新手指南 <span>6</span></a></li>
+    </ul>
+  </aside>
+
+  <!-- 主内容 -->
+  <main class="main-col" id="mainContent">
+
+    <!-- 1 领域概览 -->
+    <section class="card-panel overview" id="overview">
+      <div class="section-head">
+        <h2>赛事与速通领域概览</h2>
+        <span class="sub">截至 2026-11-08</span>
+      </div>
+      <p>
+        这个领域大体分成两条线：一条是<strong>对抗型电竞赛事</strong>，以小组赛、淘汰赛的赛程与对阵为核心；另一条是<strong>单人速通挑战</strong>，以纪录认证、分类规则和路线差异为核心。两条线共享同一批观众，但消费方式不同——前者要追时间表，后者要追纪录和方法。
+      </p>
+      <p>
+        速通部分目前活跃的分类主要有 <strong>Any%</strong>（任意完成度最快通关）、<strong>100%</strong>（完成全部收集要素）、<strong>Glitchless</strong>（禁止利用漏洞）和 <strong>Low%</strong>（最低完成度通关）。不同分类之间不能直接比较时间，同一条赛道里还要区分版本号，例如《暗潮回廊》1.3 与 1.4 的路线就完全不同。
+      </p>
+      <p>
+        赛事部分则要看赛制层级。星火杯这类杯赛采用 BO3 小组循环加 BO5 淘汰，单场时长与选手状态波动直接相关；而冬季速通挑战赛是积分制，按分类分别计分，跨分类成绩不合并。了解这些结构，才能判断一场比赛的含金量与一条纪录的难度。
+      </p>
+      <p>
+        近期值得关注的具体变化包括：11 月 6 日《暗潮回廊》Any% 规则修订、11 月 4 日星火杯小组赛程公布、11 月 2 日冬季速通挑战赛开放 100% 分类报名。这些变动都会影响你接下来该看哪一场、该信哪一条纪录。
+      </p>
+    </section>
+
+    <!-- 2 精选内容推荐 -->
+    <section class="card-panel" id="picks">
+      <div class="section-head">
+        <h2>精选条目推荐</h2>
+        <span class="sub">按热度与更新综合排序</span>
+      </div>
+      <div class="card-grid">
+
+        <article class="content-card">
+          <div class="thumb">
+            <img src="https://picsum.photos/seed/mrds-anchao-anypct01/400/300" alt="暗潮回廊 Any% 速通纪录展示画面" width="400" height="300" loading="lazy">
+            <span class="badge">Any%</span>
+            <span class="heat">热度 9.6</span>
+          </div>
+          <div class="card-body">
+            <h3>暗潮回廊 Any% 01:48:22</h3>
+            <p class="desc">现行 1.4 版本最快认证成绩，路线舍弃第三区宝箱，改用二段滑铲穿过钟楼。与旧纪录差距集中在开场 4 分钟。</p>
+            <div class="tags">
+              <span class="tag green">1.4 版本</span>
+              <span class="tag">单人</span>
+              <span class="tag">已认证</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="thumb">
+            <img src="https://picsum.photos/seed/mrds-xinghuo-cup02/400/300" alt="星火杯小组赛对阵舞台画面" width="400" height="300" loading="lazy">
+            <span class="badge">赛事</span>
+            <span class="heat">热度 9.3</span>
+          </div>
+          <div class="card-body">
+            <h3>星火杯八强对阵表</h3>
+            <p class="desc">11 月 9 日起连打三天，A 组头名对 B 组第二。赛制为 BO5，决胜局改用新地图池，前两局沿用旧图。</p>
+            <div class="tags">
+              <span class="tag green">BO5</span>
+              <span class="tag">11-09 开赛</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="thumb">
+            <img src="https://picsum.photos/seed/mrds-winter-100pct03/400/300" alt="冬季速通挑战赛 100% 分类路线示意图" width="400" height="300" loading="lazy">
+            <span class="badge">100%</span>
+            <span class="heat">热度 9.1</span>
+          </div>
+          <div class="card-body">
+            <h3>冬季速通挑战赛 100% 分类</h3>
+            <p class="desc">11 月 2 日开放报名，要求提交完整收集截图与分段计时。当前领跑成绩 3:12:40，比第二快约 6 分钟。</p>
+            <div class="tags">
+              <span class="tag green">积分制</span>
+              <span class="tag">收集要素</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="thumb">
+            <img src="https://picsum.photos/seed/mrds-glitchless-route04/400/300" alt="Glitchless 分类路线规划界面" width="400" height="300" loading="lazy">
+            <span class="badge">Glitchless</span>
+            <span class="heat">热度 8.8</span>
+          </div>
+          <div class="card-body">
+            <h3>Glitchless 无漏洞路线拆解</h3>
+            <p class="desc">禁止穿墙与卡帧后，中段走廊必须走常规门。文章按五个节点给出时间预算，说明哪一段最容易丢秒。</p>
+            <div class="tags">
+              <span class="tag green">无漏洞</span>
+              <span class="tag">路线规划</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="thumb">
+            <img src="https://picsum.photos/seed/mrds-lowpct-run05/400/300" alt="Low% 最低完成度速通画面" width="400" height="300" loading="lazy">
+            <span class="badge">Low%</span>
+            <span class="heat">热度 8.5</span>
+          </div>
+          <div class="card-body">
+            <h3>Low% 最低完成度通关</h3>
+            <p class="desc">只拿两件必需道具，跳过全部支线。难点在第四区必须靠精准跳跃绕过触发点，容错只有一次。</p>
+            <div class="tags">
+              <span class="tag green">低完成度</span>
+              <span class="tag">跳跃技巧</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="thumb">
+            <img src="https://picsum.photos/seed/mrds-rule-change06/400/300" alt="速通规则修订条文对照界面" width="400" height="300" loading="lazy">
+            <span class="badge">规则</span>
+            <span class="heat">热度 8.4</span>
+          </div>
+          <div class="card-body">
+            <h3>11 月速通规则修订对照</h3>
+            <p class="desc">11 月 6 日生效：计时起点从按键改为加载完成，旧录像需重标。同时明确帧数上限为 120 fps。</p>
+            <div class="tags">
+              <span class="tag green">11-06 生效</span>
+              <span class="tag">计时口径</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="thumb">
+            <img src="https://picsum.photos/seed/mrds-team-rank07/400/300" alt="星火杯战队积分榜画面" width="400" height="300" loading="lazy">
+            <span class="badge">战队</span>
+            <span class="heat">热度 8.2</span>
+          </div>
+          <div class="card-body">
+            <h3>星火杯小组积分榜</h3>
+            <p class="desc">A 组前三仅差 2 分，末轮直接对话决定出线。B 组头名已锁定，第二名仍有两队竞争。</p>
+            <div class="tags">
+              <span class="tag green">小组赛</span>
+              <span class="tag">积分</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <div class="thumb">
+            <img src="https://picsum.photos/seed/mrds-version-strength08/400/300" alt="版本强度对比图表" width="400" height="300" loading="lazy">
+            <span class="badge">版本</span>
+            <span class="heat">热度 8.0</span>
+          </div>
+          <div class="card-body">
+            <h3>1.4 版本强度变化速览</h3>
+            <p class="desc">钟楼区域移动速度上调，二段滑铲收益变大；同时修复了旧版的贴墙加速，Any% 路线整体前移。</p>
+            <div class="tags">
+              <span class="tag green">1.4</span>
+              <span class="tag">强度对比</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- 3 最新动态 -->
+    <section class="card-panel" id="updates">
+      <div class="section-head">
+        <h2>最新更新与赛程动态</h2>
+        <span class="sub">11 月 5 日 — 11 月 8 日</span>
+      </div>
+      <ul class="update-list">
+        <li>
+          <span class="update-time">今天 09:30</span>
+          <div class="update-body">
+            <strong>暗潮回廊 Any% 新增 3 条认证</strong>
+            <p>最快一条 01:48:22，采用 1.4 版本钟楼新路线。</p>
+          </div>
+        </li>
+        <li>
+          <span class="update-time">今天 08:10</span>
+          <div class="update-body">
+            <strong>星火杯八强赛程公布</strong>
+            <p>11 月 9 日 19:00 开赛，首场为 A1 对 B2，BO5 制。</p>
+          </div>
+        </li>
+        <li>
+          <span class="update-time">昨天 21:40</span>
+          <div class="update-body">
+            <strong>冬季速通挑战赛 100% 分类报名截止</strong>
+            <p>共 74 人提交，需在 11 月 12 日前上传完整分段计时。</p>
+          </div>
+        </li>
+        <li>
+          <span class="update-time">昨天 18:05</span>
+          <div class="update-body">
+            <strong>Low% 分类规则补充说明</strong>
+            <p>明确第四区触发点判定边界，绕过方式需在录像中可见。</p>
+          </div>
+        </li>
+        <li>
+          <span class="update-time">11-06 16:20</span>
+          <div class="update-body">
+            <strong>Any% 计时口径修订生效</strong>
+            <p>起点改为加载完成，帧数上限 120 fps，旧纪录需重标。</p>
+          </div>
+        </li>
+        <li>
+          <span class="update-time">11-06 11:00</span>
+          <div class="update-body">
+            <strong>Glitchless 分类新增禁项</strong>
+            <p>禁止使用菜单暂停取消后摇，违规录像不予认证。</p>
+          </div>
+        </li>
+        <li>
+          <span class="update-time">11-05 20:30</span>
+          <div class="update-body">
+            <strong>星火杯小组赛收官</strong>
+            <p>A 组三队同分，按小分排定名次；B 组头名提前锁定。</p>
+          </div>
+        </li>
+        <li>
+          <span class="update-time">11-05 14:15</span>
+          <div class="update-body">
+            <strong>1.4 版本强度表更新</strong>
+            <p>钟楼区域移动速度上调，二段滑铲路线收益提升。</p>
+          </div>
+        </li>
+        <li>
+          <span class="update-time">11-04 10:00</span>
+          <div class="update-body">
+            <strong>冬季速通挑战赛赛程发布</strong>
+            <p>按分类分四批进行，Any% 批次安排在 11 月 15 日。</p>
+          </div>
+        </li>
+        <li>
+          <span class="update-time">11-03 19:45</span>
+          <div class="update-body">
+            <strong>选手「夜弦」刷新 Low% 个人最好成绩</strong>
+            <p>成绩 00:52:18，比原纪录快 41 秒。</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 4 分类入口 -->
+    <section class="card-panel" id="categories">
+      <div class="section-head">
+        <h2>分类入口</h2>
+        <span class="sub">按玩法与赛事类型划分</span>
+      </div>
+      <div class="cat-grid">
+        <a class="cat-item" href="#deep"><b>Any% 速通</b><span>最快通关 · 312 条</span></a>
+        <a class="cat-item" href="#deep"><b>100% 通关</b><span>全收集 · 74 条</span></a>
+        <a class="cat-item" href="#deep"><b>Glitchless</b><span>无漏洞 · 96 条</span></a>
+        <a class="cat-item" href="#deep"><b>Low% 低完成度</b><span>最简路线 · 41 条</span></a>
+        <a class="cat-item" href="#picks"><b>小组循环赛</b><span>BO3 · 32 场</span></a>
+        <a class="cat-item" href="#picks"><b>淘汰赛 BO5</b><span>八强起 · 14 场</span></a>
+        <a class="cat-item" href="#rank"><b>选手排行榜</b><span>按分类计分</span></a>
+        <a class="cat-item" href="#news"><b>规则与公告</b><span>修订与认证说明</span></a>
+      </div>
+    </section>
+
+    <!-- 5 深度解析 -->
+    <section class="card-panel deep" id="deep">
+      <div class="section-head">
+        <h2>速通分类与赛事赛制的深度解析</h2>
+        <span class="sub">判断一条纪录或一场比赛的含金量</span>
+      </div>
+
+      <h3>Any% 与 100% 的差别不只是时间</h3>
+      <p>
+        Any% 追求的是最短时间内完成通关条件，允许跳过绝大部分收集和支线。因此它的路线高度压缩，收益来自每一处能省下的移动与动画。100% 则要求完成全部收集要素或指定清单，路线更长、分段更多，失误的累积效应也更强。两者不能横向比较时间，<span class="hl">判断难度要看各自分类内的名次密度</span>。
+      </p>
+      <p>
+        以《暗潮回廊》为例，Any% 前三名差距在 90 秒以内，属于高度内卷；100% 前三名差距约 6 分钟，说明路线尚未被完全优化，仍有较大提升空间。想投入练习的人，通常先看名次密度，再看自己的操作稳定性。
+      </p>
+
+      <h3>Glitchless 与 Low% 的判定差异</h3>
+      <p>
+        Glitchless 的核心是禁止利用漏洞，但不同赛事对“漏洞”的界定并不一致。常见分歧点包括：
+      </p>
+      <ul>
+        <li>菜单暂停取消后摇是否算漏洞（11 月 6 日修订后明确算）；</li>
+        <li>贴墙加速是否属于引擎特性还是漏洞；</li>
+        <li>帧数上限与刷新率是否影响判定。</li>
+      </ul>
+      <p>
+        Low% 则是用最低完成度通关，允许使用游戏内一切机制，只要完成度不超过上限。它和 Any% 的关系是：Any% 可以顺便多拿道具，Low% 不能。因此 Low% 对跳跃精度和触发点绕行要求更高，容错往往只有一次。
+      </p>
+
+      <h3>赛事赛制怎么看含金量</h3>
+      <p>
+        小组循环加淘汰是主流结构。星火杯采用 BO3 小组赛、BO5 淘汰赛，小组赛阶段允许战术保留，淘汰赛才见真章。判断一场比赛的分量，可以看三个维度：
+      </p>
+      <ul>
+        <li><strong>赛制层级</strong>：BO5 的容错低于 BO3，逆转空间更大；</li>
+        <li><strong>地图池</strong>：决胜局换新图池，会显著改变双方准备量；</li>
+        <li><strong>积分压力</strong>：末轮直接对话的场次，往往比头名已定的比赛更激烈。</li>
+      </ul>
+      <p>
+        以本届星火杯为例，A 组前三仅差 2 分，末轮两场都是出线生死战；B 组头名已锁定，第二名仍有两队竞争，观赛价值集中在 A 组末轮与 B 组第二名之争。
+      </p>
+
+      <h3>版本变化如何影响路线与纪录</h3>
+      <p>
+        1.4 版本上调钟楼区域移动速度，同时修复旧版贴墙加速，结果是 Any% 路线整体前移，原本的捷径失效但主路更快。对选手而言，这意味着旧录像的参考价值下降；对观众而言，这意味着 11 月 6 日之后的纪录才具备横向对比意义。
+      </p>
+      <p>
+        速通纪录的时效性很强，跨版本比较往往失真。看到一条成绩时，先确认版本号、分类、计时口径三项，再判断它是否值得作为参考基准。
+      </p>
+    </section>
+
+    <!-- 6 体验指南 -->
+    <section class="card-panel" id="guide">
+      <div class="section-head">
+        <h2>观赛与速通内容的消费路径</h2>
+        <span class="sub">从哪看起、怎么判断值不值得投入时间</span>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <b>先确定你要看的是对抗还是单人</b>
+          <p>想看临场博弈与团队配合，从星火杯八强赛程入手；想看个人操作极限，从 Any% 与 Low% 的纪录视频入手。两类内容节奏完全不同，混着看容易失去重点。</p>
+        </div>
+        <div class="step">
+          <b>再看分类，不要跨分类比时间</b>
+          <p>Any% 的 1 小时 48 分和 100% 的 3 小时 12 分不是同一把尺子。先选定分类，再看该分类内的名次密度，差距越小说明竞争越激烈。</p>
+        </div>
+        <div class="step">
+          <b>确认版本与计时口径</b>
+          <p>11 月 6 日之后的纪录采用新计时起点与 120 fps 上限。旧录像可以看路线思路，但不宜直接当作当前基准。</p>
+        </div>
+        <div class="step">
+          <b>判断一场比赛是否值得追</b>
+          <p>看三点：是否出线生死战、是否 BO5、是否换新图池。三者占两项以上，通常值得完整观看；头名已定的场次可以只看集锦。</p>
+        </div>
+        <div class="step">
+          <b>入门练习从 Glitchless 开始</b>
+          <p>无漏洞分类不依赖特殊技巧，路线稳定、可复现，适合建立分段计时习惯。熟练后再转向 Any% 追求极限压缩。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 FAQ -->
+    <section class="card-panel" id="faq">
+      <div class="section-head">
+        <h2>常见问答</h2>
+        <span class="sub">关于分类、纪录与赛制</span>
+      </div>
+
+      <details class="faq-item" open>
+        <summary>Any% 和 100% 的通关时间为什么差距这么大？</summary>
+        <div class="faq-body">Any% 只要求完成通关条件，可以跳过收集与支线，路线被压缩到最短；100% 要求完成全部收集要素，路线更长且分段更多。两者考核目标不同，时间不能直接比较，应分别看各自分类内的名次密度。</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>速通纪录一般多久更新一次？</summary>
+        <div class="faq-body">没有固定周期，取决于是否有选手提交并完成认证。以《暗潮回廊》Any% 为例，11 月 6 日规则修订后到 11 月 8 日已新增 3 条认证。规则变动期通常提交更集中。</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Glitchless 里哪些操作算违规？</summary>
+        <div class="faq-body">11 月 6 日修订后，菜单暂停取消后摇明确算违规；贴墙加速在 1.4 版本已被修复，不再涉及判定争议；帧数上限为 120 fps，超出部分不计入有效成绩。具体以当次赛事公告为准。</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>第一次看速通，从哪个分类入手比较好？</summary>
+        <div class="faq-body">建议从 Glitchless 入手。它不依赖穿墙、卡帧等特殊技巧，路线稳定、可复现，观众容易看懂每一步在做什么。熟悉地图结构后，再看 Any% 的极限压缩会更有感觉。</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>星火杯 BO3 和 BO5 的观赛体验差别在哪？</summary>
+        <div class="faq-body">BO3 容错较低，一局失误可能直接决定胜负，节奏快但逆转空间小；BO5 允许调整战术，后程翻盘更常见。本届八强起采用 BO5，决胜局换新图池，准备量差异会被放大。</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>版本更新后，旧纪录还有参考价值吗？</summary>
+        <div class="faq-body">路线思路仍有参考价值，但时间不宜直接对比。1.4 版本上调钟楼移动速度、修复贴墙加速，主路整体前移。看旧纪录时重点看分段处理与失误点，而不是绝对时间。</div>
+      </details>
+    </section>
+
+    <!-- 8 用户评论 -->
+    <section class="card-panel" id="comments">
+      <div class="section-head">
+        <h2>观众与选手评论</h2>
+        <span class="sub">围绕具体条目与分类</span>
+      </div>
+      <div class="comment-list">
+
+        <div class="comment">
+          <div class="comment-top">
+            <span class="avatar" style="background:#34d399">夜</span>
+            <b>夜弦</b><time>今天 10:12</time>
+          </div>
+          <p>1.4 钟楼那段确实快了，但二段滑铲的容错比旧版低，练了两天才稳定。</p>
+        </div>
+
+        <div class="comment">
+          <div class="comment-top">
+            <span class="avatar" style="background:#5ba8f5">阿</span>
+            <b>阿岚看比赛</b><time>今天 09:48</time>
+          </div>
+          <p>A 组末轮那两场必须看，三队同分太刺激了，BO5 应该会打满。</p>
+        </div>
+
+        <div class="comment">
+          <div class="comment-top">
+            <span class="avatar" style="background:#f5b942">老</span>
+            <b>老周拆路线</b><time>今天 08:55</time>
+          </div>
+          <p>100% 分类前三差 6 分钟，说明还有优化空间，估计年底前会有人压到 3 小时内。</p>
+        </div>
+
+        <div class="comment">
+          <div class="comment-top">
+            <span class="avatar" style="background:#f97362">桔</span>
+            <b>桔子不酸</b><time>昨天 22:30</time>
+          </div>
+          <p>计时口径改成加载完成后，之前存的录像全要重标，有点麻烦但确实更公平。</p>
+        </div>
+
+        <div class="comment">
+          <div class="comment-top">
+            <span class="avatar" style="background:#34d399">慢</span>
+            <b>慢速通关党</b><time>昨天 20:16</time>
+          </div>
+          <p>Low% 第四区那个触发点绕行，我试了十几次才过一次，容错真的只有一次。</p>
+        </div>
+
+        <div class="comment">
+          <div class="comment-top">
+            <span class="avatar" style="background:#5ba8f5">星</span>
+            <b>星火观众席</b><time>昨天 19:02</time>
+          </div>
+          <p>B 组头名已定，第二名那场反而更有看头，两队都要抢分。</p>
+        </div>
+
+        <div class="comment">
+          <div class="comment-top">
+            <span class="avatar" style="background:#f5b942">帧</span>
+            <b>帧数警察</b><time>11-07 23:40</time>
+          </div>
+          <p>120 fps 上限挺合理，之前高刷优势太明显，现在大家起跑线接近了。</p>
+        </div>
+
+        <div class="comment">
+          <div class="comment-top">
+            <span class="avatar" style="background:#f97362">青</span>
+            <b>青柠汽水</b><time>11-07 21:08</time>
+          </div>
+          <p>Glitchless 禁菜单暂停取消后摇之后，中段走廊节奏完全变了，得重新排时间。</p>
+        </div>
+
+        <div class="comment">
+          <div class="comment-top">
+            <span class="avatar" style="background:#34d399">路</span>
+            <b>路过的高手</b><time>11-07 16:25</time>
+          </div>
+          <p>Any% 前三差 90 秒，这内卷程度有点夸张，感觉每一步都被算死了。</p>
+        </div>
+
+        <div class="comment">
+          <div class="comment-top">
+            <span class="avatar" style="background:#5ba8f5">小</span>
+            <b>小满观赛</b><time>11-06 22:14</time>
+          </div>
+          <p>星火杯决胜局换新图池这个设定不错，准备量不够的队伍很容易翻车。</p>
+        </div>
+
+        <div class="comment">
+          <div class="comment-top">
+            <span class="avatar" style="background:#f5b942">录</span>
+            <b>录像党</b><time>11-06 18:50</time>
+          </div>
+          <p>旧版贴墙加速被修了，之前那条捷径录像现在只能当历史资料看。</p>
+        </div>
+
+        <div class="comment">
+          <div class="comment-top">
+            <span class="avatar" style="background:#f97362">冬</span>
+            <b>冬季速通报名中</b><time>11-06 14:33</time>
+          </div>
+          <p>100% 分类要求提交完整收集截图，整理材料比跑图还花时间。</p>
+        </div>
+
+        <div class="comment">
+          <div class="comment-top">
+            <span class="avatar" style="background:#34d399">钟</span>
+            <b>钟楼常客</b><time>11-05 21:47</time>
+          </div>
+          <p>1.4 主路快了，但钟楼那段对起跳时机要求更高，失误一次就丢十几秒。</p>
+        </div>
+
+        <div class="comment">
+          <div class="comment-top">
+            <span class="avatar" style="background:#5ba8f5">看</span>
+            <b>看个热闹</b><time>11-05 15:20</time>
+          </div>
+          <p>不太懂分类，感觉 Any% 看起来最爽，一路冲到底不用绕来绕去。</p>
+        </div>
+
+        <div class="comment">
+          <div class="comment-top">
+            <span class="avatar" style="background:#f5b942">数</span>
+            <b>数据派老陈</b><time>11-04 20:05</time>
+          </div>
+          <p>建议看纪录时都标上版本号，跨版本比时间真的没意义，容易误导新人。</p>
+        </div>
+
+        <div class="comment">
+          <div class="comment-top">
+            <span class="avatar" style="background:#f97362">小</span>
+            <b>小鹿练速通</b><time>11-04 12:41</time>
+          </div>
+          <p>从 Glitchless 开始练确实稳，先把分段计时习惯养起来，再去碰 Any%。</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 9 相关资讯 -->
+    <section class="card-panel" id="news">
+      <div class="section-head">
+        <h2>相关资讯</h2>
+        <span class="sub">赛事与速通圈近期动态</span>
+      </div>
+      <div class="news-list">
+
+        <article class="news-item">
+          <div class="nthumb">
+            <img src="https://picsum.photos/seed/mrds-news-anypct01/600/400" alt="暗潮回廊 Any% 规则修订公告配图" width="600" height="400" loading="lazy">
+          </div>
+          <div>
+            <div class="ndate">2026-11-06</div>
+            <h3>暗潮回廊 Any% 计时口径修订生效</h3>
+            <p>起点改为加载完成，帧数上限设为 120 fps，旧录像需在两周内重标，否则不计入分类榜。</p>
+          </div>
+        </article>
+
+        <article class="news-item">
+          <div class="nthumb">
+            <img src="https://picsum.photos/seed/mrds-news-xinghuo02/600/400" alt="星火杯八强对阵公布现场" width="600" height="400" loading="lazy">
+          </div>
+          <div>
+            <div class="ndate">2026-11-05</div>
+            <h3>星火杯小组赛收官，八强对阵公布</h3>
+            <p>A 组三队同分按小分排定，末轮两场均为出线生死战；八强赛 11 月 9 日 19:00 开打，BO5 制。</p>
+          </div>
+        </article>
+
+        <article class="news-item">
+          <div class="nthumb">
+            <img src="https://picsum.photos/seed/mrds-news-winter10003/600/400" alt="冬季速通挑战赛 100% 分类报名页面" width="600" height="400" loading="lazy">
+          </div>
+          <div>
+            <div class="ndate">2026-11-02</div>
+            <h3>冬季速通挑战赛开放 100% 分类报名</h3>
+            <p>积分制按分类分别计分，要求提交完整收集截图与分段计时，报名截止 11 月 7 日。</p>
+          </div>
+        </article>
+
+        <article class="news-item">
+          <div class="nthumb">
+            <img src="https://picsum.photos/seed/mrds-news-lowpct04/600/400" alt="Low% 分类规则补充说明文件" width="600" height="400" loading="lazy">
+          </div>
+          <div>
+            <div class="ndate">2026-10-31</div>
+            <h3>Low% 分类补充第四区触发点判定</h3>
+            <p>绕过方式须在录像中完整可见，不可使用剪辑拼接；判定边界以地图触发线为准。</p>
+          </div>
+        </article>
+
+        <article class="news-item">
+          <div class="nthumb">
+            <img src="https://picsum.photos/seed/mrds-news-version14/600/400" alt="1.4 版本强度调整说明图" width="600" height="400" loading="lazy">
+          </div>
+          <div>
+            <div class="ndate">2026-10-28</div>
+            <h3>1.4 版本强度调整：钟楼区域移动速度上调</h3>
+            <p>二段滑铲收益提升，旧版贴墙加速被修复，Any% 与 Glitchless 路线均受影响。</p>
+          </div>
+        </article>
+
+        <article class="news-item">
+          <div class="nthumb">
+            <img src="https://picsum.photos/seed/mrds-news-player06/600/400" alt="选手夜弦 Low% 个人最好成绩录像画面" width="600" height="400" loading="lazy">
+          </div>
+          <div>
+            <div class="ndate">2026-10-26</div>
+            <h3>选手夜弦刷新 Low% 个人最好成绩</h3>
+            <p>成绩 00:52:18，比原个人纪录快 41 秒，第四区触发点绕行一次成功。</p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- 10 相关推荐 -->
+    <section class="card-panel" id="related">
+      <div class="section-head">
+        <h2>延伸方向与相关条目</h2>
+        <span class="sub">从分类与方法延伸</span>
+      </div>
+      <div class="rec-tags">
+        <a class="rec-tag" href="#deep">Any% 路线优化</a>
+        <a class="rec-tag" href="#deep">100% 收集清单</a>
+        <a class="rec-tag" href="#deep">Glitchless 判定边界</a>
+        <a class="rec-tag" href="#deep">Low% 触发点绕行</a>
+        <a class="rec-tag" href="#guide">分段计时方法</a>
+        <a class="rec-tag" href="#picks">BO5 赛制解读</a>
+        <a class="rec-tag" href="#news">1.4 版本强度表</a>
+        <a class="rec-tag" href="#faq">计时口径对照</a>
+      </div>
+    </section>
+
+    <!-- 11 热门榜单 -->
+    <section class="card-panel" id="rank">
+      <div class="section-head">
+        <h2>本周速通与赛事热度榜</h2>
+        <span class="sub">统计区间 11-01 至 11-08</span>
+      </div>
+      <ol class="rank-list">
+        <li>
+          <div class="rname">暗潮回廊 Any% 01:48:22<small>1.4 版本 · 已认证</small></div>
+          <div class="rval">9.6</div>
+        </li>
+        <li>
+          <div class="rname">星火杯八强对阵表<small>11-09 开赛 · BO5</small></div>
+          <div class="rval">9.3</div>
+        </li>
+        <li>
+          <div class="rname">冬季速通挑战赛 100% 分类<small>74 人报名 · 积分制</small></div>
+          <div class="rval">9.1</div>
+        </li>
+        <li>
+          <div class="rname">Glitchless 无漏洞路线拆解<small>五节点时间预算</small></div>
+          <div class="rval">8.8</div>
+        </li>
+        <li>
+          <div class="rname">Low% 00:52:18 纪录<small>选手夜弦 · 11-03</small></div>
+          <div class="rval">8.5</div>
+        </li>
+        <li>
+          <div class="rname">11 月规则修订对照<small>计时口径 · 帧数上限</small></div>
+          <div class="rval">8.4</div>
+        </li>
+        <li>
+          <div class="rname">星火杯小组积分榜<small>A 组三队同分</small></div>
+          <div class="rval">8.2</div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- 12 条目时间线 -->
+    <section class="card-panel" id="timeline">
+      <div class="section-head">
+        <h2>近期关键节点时间线</h2>
+        <span class="sub">规则、赛程与纪录变动</span>
+      </div>
+      <ul class="timeline">
+        <li><b>11-08 Any% 新增 3 条认证</b><span>最快 01:48:22，采用 1.4 钟楼路线</span></li>
+        <li><b>11-06 Any% 计时口径修订生效</b><span>加载完成起点 · 120 fps 上限</span></li>
+        <li><b>11-05 星火杯小组赛收官</b><span>A 组三队同分，八强对阵公布</span></li>
+        <li><b>11-04 冬季速通挑战赛赛程发布</b><span>Any% 批次定于 11 月 15 日</span></li>
+        <li><b>11-02 100% 分类开放报名</b><span>要求完整收集截图与分段计时</span></li>
+        <li><b>10-28 1.4 版本强度调整</b><span>钟楼移动速度上调，贴墙加速修复</span></li>
+      </ul>
+    </section>
+
+  </main>
+
+  <!-- 右侧辅助栏 -->
+  <aside class="side-col" aria-label="辅助信息">
+
+    <section class="side-panel">
+      <h2>选手速通榜</h2>
+      <ul class="mini-rank">
+        <li><span class="idx">1</span><span class="nm"><b>夜弦</b> Low% 00:52:18</span><span class="vl">+41s</span></li>
+        <li><span class="idx">2</span><span class="nm"><b>白榆</b> Any% 01:48:22</span><span class="vl">榜首</span></li>
+        <li><span class="idx">3</span><span class="nm"><b>老周</b> 100% 03:12:40</span><span class="vl">+6min</span></li>
+        <li><span class="idx">4</span><span class="nm"><b>青柠</b> Glitchless 02:06:11</span><span class="vl">+18s</span></li>
+        <li><span class="idx">5</span><span class="nm"><b>小鹿</b> Any% 01:49:57</span><span class="vl">+95s</span></li>
+      </ul>
+    </section>
+
+    <section class="side-panel">
+      <h2>今日赛程</h2>
+      <ul class="mini-rank">
+        <li><span class="idx">19:00</span><span class="nm"><b>星火杯八强</b> A1 对 B2</span><span class="vl">BO5</span></li>
+        <li><span class="idx">20:30</span><span class="nm"><b>星火杯八强</b> B1 对 A2</span><span class="vl">BO5</span></li>
+        <li><span class="idx">22:00</span><span class="nm"><b>冬季速通</b> Any% 批次签到</span><span class="vl">线上</span></li>
+      </ul>
+      <p class="side-note" style="margin-top:10px;">赛程以赛事公告为准，开赛前 15 分钟开放对阵确认。</p>
+    </section>
+
+    <section class="side-panel">
+      <h2>规则速查</h2>
+      <div class="side-links">
+        <a href="#faq">Any% 计时口径</a>
+        <a href="#faq">Glitchless 禁项</a>
+        <a href="#faq">Low% 触发点</a>
+        <a href="#deep">100% 收集清单</a>
+        <a href="#news">帧数上限说明</a>
+      </div>
+    </section>
+
+    <section class="side-panel">
+      <h2>分类速览</h2>
+      <ul class="mini-rank">
+        <li><span class="idx">A</span><span class="nm">Any% 最快通关</span><span class="vl">312</span></li>
+        <li><span class="idx">B</span><span class="nm">100% 全收集</span><span class="vl">74</span></li>
+        <li><span class="idx">C</span><span class="nm">Glitchless 无漏洞</span><span class="vl">96</span></li>
+        <li><span class="idx">D</span><span class="nm">Low% 低完成度</span><span class="vl">41</span></li>
+      </ul>
+    </section>
+
+  </aside>
+
+</div>
+
+<!-- 页尾 -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="#top">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" rx="14" fill="#152238"/>
+          <path d="M14 44 L24 20 L32 36 L40 20 L50 44" stroke="#34d399" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="32" cy="48" r="3" fill="#f5b942"/>
+        </svg>
+        <span class="brand-text">mrds</span>
+      </a>
+      <p>聚合电竞赛程、速通纪录认证、分类规则与版本强度变化，服务追赛观众与速通练习者。</p>
+    </div>
+    <div class="footer-col">
+      <h3>速通分类</h3>
+      <a href="#deep">Any% 速通</a>
+      <a href="#deep">100% 通关</a>
+      <a href="#deep">Glitchless</a>
+      <a href="#deep">Low% 低完成度</a>
+    </div>
+    <div class="footer-col">
+      <h3>赛事栏目</h3>
+      <a href="#picks">星火杯对阵</a>
+      <a href="#updates">小组积分</a>
+      <a href="#news">规则公告</a>
+      <a href="#rank">热度榜单</a>
+    </div>
+    <div class="footer-col">
+      <h3>参与与参考</h3>
+      <a href="#guide">观赛指南</a>
+      <a href="#faq">常见问答</a>
+      <a href="#timeline">节点时间线</a>
+      <a href="#related">延伸方向</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>mrds · 赛事与速通内容聚合</span>
+    <span>部分内容为示例数据，仅用于展示页面结构</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var menuToggle = document.getElementById('menuToggle');
+  var mainNav = document.getElementById('mainNav');
+  if(menuToggle && mainNav){
+    menuToggle.addEventListener('click', function(){
+      var isCollapsed = mainNav.classList.toggle('collapsed');
+      menuToggle.setAttribute('aria-expanded', String(!isCollapsed));
+    });
+  }
+
+  var searchInput = document.getElementById('siteSearch');
+  var searchBtn = document.getElementById('searchBtn');
+  var feedback = document.getElementById('searchFeedback');
+  var sfInner = document.getElementById('sfInner');
+  var sections = Array.prototype.slice.call(document.querySelectorAll('main .card-panel'));
+
+  function clearMarks(){
+    sections.forEach(function(s){ s.style.display = ''; });
+  }
+
+  function doSearch(){
+    var q = (searchInput.value || '').trim();
+    if(!q){
+      clearMarks();
+      feedback.classList.remove('active');
+      return;
+    }
+    var hits = 0;
+    var firstHit = null;
+    sections.forEach(function(sec){
+      var text = sec.textContent || '';
+      if(text.indexOf(q) !== -1){
+        sec.style.display = '';
+        hits++;
+        if(!firstHit){ firstHit = sec; }
+      }else{
+        sec.style.display = 'none';
+      }
+    });
+    feedback.classList.add('active');
+    if(hits === 0){
+      clearMarks();
+      sfInner.textContent = '未找到匹配内容，试试“速通”“星火杯”“暗潮回廊”等词。';
+      feedback.style.background = '';
+    }else{
+      sfInner.textContent = '找到 ' + hits + ' 个相关板块，已为你在下方筛选显示。';
+      if(firstHit && firstHit.scrollIntoView){
+        firstHit.scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    }
+  }
+
+  if(searchBtn){
+    searchBtn.addEventListener('click', doSearch);
+  }
+  if(searchInput){
+    searchInput.addEventListener('keydown', function(e){
+      if(e.key === 'Enter'){ e.preventDefault(); doSearch(); }
+    });
+    searchInput.addEventListener('input', function(){
+      if(!searchInput.value.trim()){
+        clearMarks();
+        feedback.classList.remove('active');
+      }
+    });
+  }
+})();
+</script>
+</body>
+  </html>
