@@ -1,0 +1,1216 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mw777.me - 资源聚合导航指南</title>
+<meta name="description" content="mw777.me 汇集资源聚合站点的分类导航、条目速览与使用路径，整理游戏、影视、工具、社区等常见入口类型，适合需要快速比对站点分类与内容方向的访问者参考。">
+<meta name="keywords" content="资源聚合导航,站点分类索引,入口类型对比,在线资源速览,导航站选择">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f2f3d'/%3E%3Cpath d='M14 44V20h6l7 12 7-12h6v24h-6V31l-5 8h-4l-5-8v13z' fill='%2367d6c1'/%3E%3Ccircle cx='49' cy='24' r='5' fill='%23f2b544'/%3E%3C/svg%3E">
+<style>
+:root{
+  --ink:#12242b;
+  --ink-soft:#3d545c;
+  --muted:#6b8189;
+  --line:#d9e3e5;
+  --line-soft:#e8eef0;
+  --bg:#f4f7f7;
+  --panel:#ffffff;
+  --panel-alt:#f9fbfb;
+  --brand:#0f2f3d;
+  --brand-2:#175263;
+  --accent:#1f8f7c;
+  --accent-soft:#e3f4ef;
+  --gold:#b57c14;
+  --gold-soft:#fbf1da;
+  --danger:#a8442f;
+  --radius-s:6px;
+  --radius-m:10px;
+  --radius-l:16px;
+  --shadow-s:0 1px 2px rgba(18,36,43,.06);
+  --shadow-m:0 4px 16px rgba(18,36,43,.08);
+  --font:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+  --sticky-h:104px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;font-family:var(--font);color:var(--ink);background:var(--bg);
+  line-height:1.7;font-size:15.5px;-webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%}
+a{color:var(--brand-2);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3,h4{margin:0;line-height:1.35;font-weight:700}
+p{margin:0 0 .9em}
+ul,ol{margin:0 0 .9em;padding-left:1.3em}
+li{margin-bottom:.35em}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:4px}
+
+/* ====== 吸顶区：公告条 + 页头 ====== */
+.sticky-wrap{
+  position:sticky;top:0;z-index:80;
+}
+.notice-bar{
+  background:linear-gradient(90deg,#0f2f3d,#175263 55%,#1f6a5f);
+  color:#e8f6f2;font-size:13.5px;
+}
+.notice-inner{
+  max-width:1380px;margin:0 auto;padding:7px 22px;
+  display:flex;gap:14px;align-items:center;flex-wrap:wrap;
+}
+.notice-tag{
+  background:#f2b544;color:#3a2600;font-weight:700;font-size:12px;
+  padding:1px 8px;border-radius:20px;letter-spacing:.04em;white-space:nowrap;
+}
+.notice-inner ul{
+  display:flex;gap:18px;flex-wrap:wrap;margin:0;padding:0;list-style:none;
+}
+.notice-inner li{margin:0;display:flex;gap:6px;align-items:baseline}
+.notice-inner b{font-weight:600;color:#fff}
+.notice-inner time{color:#9fd2c6;font-variant-numeric:tabular-nums}
+
+.site-header{
+  background:rgba(255,255,255,.97);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+  box-shadow:var(--shadow-s);
+}
+.header-inner{
+  max-width:1380px;margin:0 auto;padding:10px 22px;
+  display:flex;align-items:center;gap:22px;flex-wrap:wrap;
+}
+.brand{display:flex;align-items:center;gap:11px;flex-shrink:0}
+.brand svg{display:block}
+.brand-text{display:flex;flex-direction:column;line-height:1.15}
+.brand-name{font-size:20px;font-weight:800;letter-spacing:.01em;color:var(--brand)}
+.brand-sub{font-size:11.5px;color:var(--muted);letter-spacing:.14em}
+.main-nav{display:flex;gap:4px;flex-wrap:wrap;flex:1}
+.main-nav a{
+  padding:6px 11px;border-radius:20px;font-size:14px;color:var(--ink-soft);
+  transition:background .15s,color .15s;white-space:nowrap;
+}
+.main-nav a:hover{background:var(--accent-soft);color:var(--brand);text-decoration:none}
+.header-tools{display:flex;gap:8px;align-items:center}
+.search-box{position:relative;display:flex;align-items:center}
+.search-box input{
+  width:196px;padding:7px 10px 7px 30px;font-size:13.5px;font-family:inherit;
+  border:1px solid var(--line);border-radius:20px;background:var(--panel-alt);
+  color:var(--ink);transition:border-color .15s,width .2s;
+}
+.search-box input:focus{outline:none;border-color:var(--accent);background:#fff;width:230px}
+.search-box .ico{position:absolute;left:10px;top:50%;transform:translateY(-50%);pointer-events:none}
+.btn-quick{
+  display:inline-block;padding:7px 15px;border-radius:20px;font-size:13.5px;font-weight:600;
+  background:var(--brand);color:#fff;border:0;cursor:pointer;font-family:inherit;
+}
+.btn-quick:hover{background:var(--brand-2);text-decoration:none;color:#fff}
+
+/* ====== 布局容器 ====== */
+.wrap{max-width:1380px;margin:0 auto;padding:0 22px}
+.layout{
+  display:grid;
+  grid-template-columns:184px minmax(0,1fr) 268px;
+  gap:26px;padding:26px 0 10px;align-items:start;
+}
+section[id],div[id="channels"]{scroll-margin-top:var(--sticky-h)}
+
+/* ====== 左频道栏 ====== */
+.channel-col{
+  position:sticky;top:var(--sticky-h);
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-l);
+  padding:14px 12px;box-shadow:var(--shadow-s);
+}
+.channel-col h2{
+  font-size:13px;letter-spacing:.1em;color:var(--muted);font-weight:700;
+  padding:0 6px 9px;border-bottom:1px solid var(--line-soft);margin-bottom:9px;
+}
+.channel-list{list-style:none;margin:0;padding:0}
+.channel-list li{margin:0}
+.channel-list a{
+  display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:var(--radius-s);
+  font-size:14px;color:var(--ink-soft);
+}
+.channel-list a:hover{background:var(--accent-soft);color:var(--brand);text-decoration:none}
+.channel-list .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.channel-list .num{margin-left:auto;font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.channel-note{
+  margin-top:12px;padding:10px;border-radius:var(--radius-s);background:var(--gold-soft);
+  font-size:12.5px;color:#6a4b0b;line-height:1.6;border:1px solid #f0dcb4;
+}
+
+/* ====== 主内容 ====== */
+.main-col{min-width:0}
+
+/* 首屏 */
+.hero{
+  position:relative;overflow:hidden;border-radius:var(--radius-l);
+  background:linear-gradient(135deg,#0f2f3d 0%,#155263 48%,#1a6b5c 100%);
+  color:#eaf6f3;padding:36px 34px 32px;margin-bottom:26px;
+  box-shadow:var(--shadow-m);
+}
+.hero::after{
+  content:"";position:absolute;right:-70px;top:-70px;width:330px;height:330px;border-radius:50%;
+  background:radial-gradient(circle at 40% 40%,rgba(103,214,193,.28),transparent 68%);
+}
+.hero::before{
+  content:"";position:absolute;left:-40px;bottom:-90px;width:260px;height:260px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.14);
+}
+.hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1fr) 268px;gap:30px;align-items:center}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:7px;font-size:12.5px;letter-spacing:.14em;
+  color:#8fe0cf;margin-bottom:12px;
+}
+.eyebrow .bar{width:22px;height:2px;background:#f2b544;display:inline-block}
+.hero h1{
+  font-size:clamp(28px,3.4vw,42px);letter-spacing:-.01em;color:#fff;margin-bottom:14px;
+  word-break:break-word;
+}
+.hero-lead{font-size:15.5px;line-height:1.78;color:#c6e3dc;max-width:590px;margin-bottom:20px}
+.hero-actions{display:flex;gap:11px;flex-wrap:wrap}
+.hero-actions .primary{
+  background:#f2b544;color:#33220a;font-weight:700;padding:10px 22px;border-radius:24px;
+  font-size:14.5px;border:0;cursor:pointer;font-family:inherit;
+}
+.hero-actions .primary:hover{background:#ffc85e;text-decoration:none;color:#33220a}
+.hero-actions .ghost{
+  border:1px solid rgba(255,255,255,.4);color:#eaf6f3;padding:10px 20px;border-radius:24px;
+  font-size:14.5px;
+}
+.hero-actions .ghost:hover{background:rgba(255,255,255,.12);text-decoration:none;color:#fff}
+.hero-stats{display:flex;gap:22px;margin-top:24px;flex-wrap:wrap}
+.hero-stats div{display:flex;flex-direction:column}
+.hero-stats b{font-size:22px;color:#fff;font-variant-numeric:tabular-nums;line-height:1.2}
+.hero-stats span{font-size:12px;color:#9ccdc1;letter-spacing:.06em}
+.hero-visual{display:flex;justify-content:center}
+.hero-visual svg{width:100%;max-width:268px;height:auto;filter:drop-shadow(0 10px 24px rgba(0,0,0,.28))}
+
+/* 板块通用 */
+.panel{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-l);
+  padding:24px 26px;margin-bottom:24px;box-shadow:var(--shadow-s);
+}
+.panel-head{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:16px;
+  margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--line-soft);flex-wrap:wrap;
+}
+.panel-head h2{font-size:20px;letter-spacing:-.005em;color:var(--brand)}
+.panel-head .sub{font-size:13px;color:var(--muted);margin-top:3px}
+.panel-head .more{font-size:13px;color:var(--accent);white-space:nowrap}
+.panel-head .more:hover{text-decoration:underline}
+
+/* 概览正文 */
+.overview-cols{display:grid;grid-template-columns:1fr 1fr;gap:6px 30px}
+.overview-cols p{margin-bottom:.8em}
+.overview-cols p:last-child{margin-bottom:0}
+
+/* 精选卡片 */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));gap:16px}
+.card{
+  border:1px solid var(--line);border-radius:var(--radius-m);overflow:hidden;
+  background:var(--panel);display:flex;flex-direction:column;
+  transition:box-shadow .18s,transform .18s,border-color .18s;
+}
+.card:hover{box-shadow:var(--shadow-m);transform:translateY(-2px);border-color:#bcd3d0}
+.card-thumb{position:relative;aspect-ratio:4/3;background:var(--line-soft);overflow:hidden}
+.card-thumb img{width:100%;height:100%;object-fit:cover}
+.card-badge{
+  position:absolute;left:9px;top:9px;background:rgba(15,47,61,.86);color:#eaf6f3;
+  font-size:11.5px;padding:2px 8px;border-radius:12px;letter-spacing:.04em;
+}
+.card-body{padding:12px 14px 14px;display:flex;flex-direction:column;flex:1}
+.card-body h3{font-size:15.5px;margin-bottom:6px;color:var(--brand);line-height:1.4}
+.card-desc{font-size:13px;color:var(--ink-soft);line-height:1.62;margin-bottom:10px;flex:1}
+.tag-row{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
+.tag{
+  font-size:11.5px;padding:1px 8px;border-radius:10px;background:var(--accent-soft);
+  color:#146354;white-space:nowrap;
+}
+.tag.gold{background:var(--gold-soft);color:#8a5c08}
+.card-meta{
+  display:flex;justify-content:space-between;align-items:center;gap:8px;
+  font-size:12px;color:var(--muted);border-top:1px dashed var(--line);padding-top:9px;
+  font-variant-numeric:tabular-nums;
+}
+.card-meta .hot{color:var(--danger);font-weight:600}
+
+/* 动态列表 */
+.feed{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.feed li{
+  display:grid;grid-template-columns:74px minmax(0,1fr) auto;gap:14px;align-items:baseline;
+  padding:10px 4px;border-bottom:1px dashed var(--line-soft);margin:0;
+}
+.feed li:last-child{border-bottom:0}
+.feed time{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.feed .feed-title{font-weight:600;color:var(--brand);font-size:14.5px}
+.feed .feed-desc{color:var(--ink-soft);font-size:13.5px}
+.feed .feed-tag{font-size:11.5px;padding:1px 8px;border-radius:10px;background:var(--panel-alt);border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+
+/* 分类入口 */
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.cat-item{
+  display:block;padding:13px 14px;border:1px solid var(--line);border-radius:var(--radius-m);
+  background:var(--panel-alt);transition:border-color .15s,background .15s;
+}
+.cat-item:hover{border-color:var(--accent);background:var(--accent-soft);text-decoration:none}
+.cat-item b{display:block;font-size:15px;color:var(--brand);margin-bottom:3px}
+.cat-item span{font-size:12.5px;color:var(--muted);line-height:1.5}
+
+/* 深度解析 */
+.article h3{
+  font-size:17px;color:var(--brand);margin:22px 0 9px;padding-left:11px;
+  border-left:3px solid var(--accent);line-height:1.4;
+}
+.article h3:first-of-type{margin-top:4px}
+.article p{color:var(--ink-soft);font-size:14.8px}
+.article ul li{color:var(--ink-soft);font-size:14.5px}
+.article .callout{
+  background:var(--panel-alt);border-left:3px solid var(--gold);border-radius:0 var(--radius-s) var(--radius-s) 0;
+  padding:12px 16px;font-size:14px;color:#5c4a1c;margin:16px 0;
+}
+
+/* 对照面板 */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:var(--radius-m);overflow:hidden}
+.compare > div{padding:14px 16px}
+.compare .ch{background:var(--brand);color:#eaf6f3;font-size:13.5px;font-weight:700;letter-spacing:.04em}
+.compare .cell{border-top:1px solid var(--line-soft);font-size:13.8px;color:var(--ink-soft);line-height:1.62}
+.compare .cell:nth-child(4n+1){background:var(--panel-alt)}
+
+/* 步骤 */
+.steps{list-style:none;counter-reset:st;padding:0;margin:0;display:grid;gap:12px}
+.steps li{
+  counter-increment:st;position:relative;padding:13px 16px 13px 52px;
+  background:var(--panel-alt);border:1px solid var(--line);border-radius:var(--radius-m);
+  font-size:14px;color:var(--ink-soft);margin:0;
+}
+.steps li::before{
+  content:counter(st,decimal-leading-zero);position:absolute;left:14px;top:12px;
+  font-size:15px;font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums;
+}
+.steps li b{display:block;color:var(--brand);font-size:14.8px;margin-bottom:2px}
+
+/* FAQ */
+.faq{display:grid;gap:9px}
+.faq details{
+  border:1px solid var(--line);border-radius:var(--radius-m);background:var(--panel);
+  overflow:hidden;
+}
+.faq summary{
+  cursor:pointer;padding:12px 42px 12px 15px;font-size:14.8px;font-weight:600;color:var(--brand);
+  position:relative;list-style:none;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"+";position:absolute;right:15px;top:50%;transform:translateY(-50%);
+  font-size:19px;color:var(--accent);font-weight:400;line-height:1;
+}
+.faq details[open] summary::after{content:"−"}
+.faq details[open] summary{border-bottom:1px solid var(--line-soft);background:var(--panel-alt)}
+.faq .ans{padding:12px 16px;font-size:14px;color:var(--ink-soft);line-height:1.72}
+.faq .ans p:last-child{margin-bottom:0}
+
+/* 评论 */
+.comments{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.cmt{
+  border:1px solid var(--line);border-radius:var(--radius-m);padding:12px 14px;
+  background:var(--panel);font-size:13.6px;color:var(--ink-soft);line-height:1.66;
+}
+.cmt-head{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.avatar{
+  width:26px;height:26px;border-radius:50%;background:var(--accent-soft);color:#146354;
+  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;
+}
+.cmt-name{font-weight:600;color:var(--brand);font-size:13px}
+.cmt-meta{margin-left:auto;font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.cmt p{margin:0}
+
+/* 资讯 */
+.news{display:grid;gap:14px}
+.news-item{
+  display:grid;grid-template-columns:132px minmax(0,1fr);gap:15px;align-items:start;
+  padding-bottom:14px;border-bottom:1px dashed var(--line-soft);
+}
+.news-item:last-child{border-bottom:0;padding-bottom:0}
+.news-item img{width:132px;height:88px;object-fit:cover;border-radius:var(--radius-s)}
+.news-item h3{font-size:15px;color:var(--brand);margin-bottom:4px}
+.news-meta{font-size:12px;color:var(--muted);margin-bottom:5px;font-variant-numeric:tabular-nums}
+.news-item p{font-size:13.6px;color:var(--ink-soft);margin:0;line-height:1.62}
+
+/* 相关推荐 */
+.reclist{display:flex;flex-wrap:wrap;gap:9px;margin:0;padding:0;list-style:none}
+.reclist li{margin:0}
+.reclist a{
+  display:inline-block;padding:6px 13px;border:1px solid var(--line);border-radius:20px;
+  font-size:13.4px;color:var(--ink-soft);background:var(--panel-alt);
+}
+.reclist a:hover{border-color:var(--accent);color:var(--brand);background:var(--accent-soft);text-decoration:none}
+
+/* 榜单 */
+.rank{list-style:none;margin:0;padding:0;counter-reset:rk;display:grid;gap:0}
+.rank li{
+  counter-increment:rk;display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:12px;
+  align-items:baseline;padding:10px 4px;border-bottom:1px dashed var(--line-soft);margin:0;
+}
+.rank li:last-child{border-bottom:0}
+.rank li::before{
+  content:counter(rk);font-size:14px;font-weight:800;color:var(--muted);text-align:center;
+  font-variant-numeric:tabular-nums;
+}
+.rank li:nth-child(1)::before,.rank li:nth-child(2)::before,.rank li:nth-child(3)::before{color:var(--gold)}
+.rank .rk-name{font-weight:600;color:var(--brand);font-size:14.6px}
+.rank .rk-desc{font-size:13px;color:var(--muted);line-height:1.55}
+.rank .rk-score{font-size:13px;color:var(--danger);font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* 时间线 */
+.timeline{list-style:none;margin:0;padding:0 0 0 20px;border-left:2px solid var(--line);display:grid;gap:14px}
+.timeline li{position:relative;margin:0}
+.timeline li::before{
+  content:"";position:absolute;left:-27px;top:6px;width:10px;height:10px;border-radius:50%;
+  background:var(--accent);border:2px solid #fff;box-shadow:0 0 0 2px var(--accent-soft);
+}
+.timeline time{font-size:12.5px;color:var(--gold);font-weight:600;font-variant-numeric:tabular-nums}
+.timeline b{display:block;font-size:14.5px;color:var(--brand);margin:2px 0 3px}
+.timeline p{font-size:13.5px;color:var(--ink-soft);margin:0}
+
+/* ====== 右辅助栏 ====== */
+.aside-col{display:grid;gap:18px;position:sticky;top:var(--sticky-h)}
+.aside-card{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-l);
+  padding:16px 17px;box-shadow:var(--shadow-s);
+}
+.aside-card h2{
+  font-size:14px;letter-spacing:.06em;color:var(--brand);margin-bottom:11px;
+  padding-bottom:9px;border-bottom:1px solid var(--line-soft);display:flex;justify-content:space-between;align-items:center;
+}
+.aside-card h2 .cnt{font-size:11.5px;color:var(--muted);font-weight:400;letter-spacing:0}
+.hot-list{list-style:none;margin:0;padding:0;counter-reset:hl}
+.hot-list li{
+  counter-increment:hl;display:grid;grid-template-columns:20px minmax(0,1fr);gap:8px;
+  padding:7px 0;border-bottom:1px dashed var(--line-soft);margin:0;font-size:13.6px;
+}
+.hot-list li:last-child{border-bottom:0;padding-bottom:0}
+.hot-list li::before{
+  content:counter(hl);font-size:12px;font-weight:800;color:#b8c6c9;text-align:center;
+  font-variant-numeric:tabular-nums;line-height:1.6;
+}
+.hot-list li:nth-child(-n+3)::before{color:var(--gold)}
+.hot-list a{color:var(--ink-soft);display:block;line-height:1.5}
+.hot-list a:hover{color:var(--brand)}
+.hot-list .tagline{font-size:11.5px;color:var(--muted);display:block}
+.update-list{list-style:none;margin:0;padding:0}
+.update-list li{
+  padding:7px 0;border-bottom:1px dashed var(--line-soft);margin:0;font-size:13.4px;color:var(--ink-soft);
+  display:flex;gap:8px;align-items:baseline;
+}
+.update-list li:last-child{border-bottom:0;padding-bottom:0}
+.update-list time{font-size:11.5px;color:var(--muted);flex-shrink:0;font-variant-numeric:tabular-nums}
+.quick-tags{display:flex;flex-wrap:wrap;gap:7px}
+.quick-tags a{
+  font-size:12.5px;padding:3px 10px;border-radius:12px;background:var(--panel-alt);
+  border:1px solid var(--line);color:var(--ink-soft);
+}
+.quick-tags a:hover{background:var(--accent-soft);border-color:var(--accent);color:var(--brand);text-decoration:none}
+.aside-note{
+  font-size:12.5px;color:#4b5f66;line-height:1.65;background:var(--accent-soft);
+  border-radius:var(--radius-s);padding:10px 12px;margin-top:10px;
+}
+
+/* 搜索无结果 */
+.no-result{
+  display:none;padding:26px;text-align:center;color:var(--muted);font-size:14px;
+  border:1px dashed var(--line);border-radius:var(--radius-m);background:var(--panel-alt);
+}
+.no-result.show{display:block}
+
+/* ====== 页尾 ====== */
+.site-footer{
+  background:var(--brand);color:#b9d4d0;margin-top:34px;padding:34px 0 20px;font-size:13.5px;
+}
+.footer-inner{max-width:1380px;margin:0 auto;padding:0 22px}
+.footer-top{display:grid;grid-template-columns:1.4fr 2.6fr;gap:34px;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.12)}
+.footer-brand{display:flex;align-items:center;gap:11px;margin-bottom:11px}
+.footer-brand .brand-name{color:#fff;font-size:19px}
+.footer-brand .brand-sub{color:#7fb3a9}
+.footer-about{line-height:1.72;color:#9dc2bc;max-width:340px}
+.footer-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.footer-cols h3{font-size:13.5px;color:#fff;margin-bottom:9px;letter-spacing:.03em}
+.footer-cols ul{list-style:none;margin:0;padding:0}
+.footer-cols li{margin-bottom:5px}
+.footer-cols a{color:#9dc2bc;font-size:13px}
+.footer-cols a:hover{color:#fff}
+.footer-bottom{
+  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+  padding-top:16px;font-size:12.5px;color:#7fa8a1;
+}
+.footer-bottom .disclaimer{color:#6f9a93}
+
+/* ====== 响应式 ====== */
+@media (max-width:1180px){
+  .layout{grid-template-columns:170px minmax(0,1fr);gap:22px}
+  .aside-col{grid-column:1/-1;position:static;grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width:1024px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-visual{display:none}
+  .channel-col{position:static}
+  .main-nav{order:3;width:100%;padding-top:4px}
+  .header-tools{margin-left:auto}
+}
+@media (max-width:860px){
+  .layout{grid-template-columns:1fr}
+  .channel-col{order:2}
+  .main-col{order:1}
+  .aside-col{order:3;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .channel-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px}
+  .overview-cols{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
+  .compare{grid-template-columns:1fr}
+  .compare .ch:nth-child(2){display:none}
+}
+@media (max-width:740px){
+  :root{--sticky-h:132px}
+  .notice-inner{font-size:12.5px;padding:6px 14px;gap:8px}
+  .notice-inner ul{gap:10px}
+  .notice-inner li:nth-child(n+3){display:none}
+  .header-inner{padding:9px 14px;gap:10px}
+  .wrap{padding:0 14px}
+  .main-nav{overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px;scrollbar-width:none}
+  .main-nav::-webkit-scrollbar{display:none}
+  .search-box input{width:132px}
+  .search-box input:focus{width:150px}
+  .btn-quick{display:none}
+  .hero{padding:26px 20px 24px}
+  .hero-lead{font-size:14.5px}
+  .hero-stats{gap:16px}
+  .panel{padding:18px 16px}
+  .card-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+  .cat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .feed li{grid-template-columns:1fr auto;gap:4px 10px}
+  .feed time{grid-column:1/-1;order:-1}
+  .news-item{grid-template-columns:96px minmax(0,1fr);gap:11px}
+  .news-item img{width:96px;height:68px}
+  .aside-col{grid-template-columns:1fr}
+  .comments{grid-template-columns:1fr}
+  .footer-cols{grid-template-columns:1fr 1fr}
+  .rank li{grid-template-columns:28px minmax(0,1fr) auto;gap:8px}
+}
+@media (max-width:400px){
+  .card-grid{grid-template-columns:1fr}
+  .cat-grid{grid-template-columns:1fr}
+  .channel-list{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;scroll-behavior:auto!important}
+}
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<div class="sticky-wrap">
+  <!-- 公告条 -->
+  <div class="notice-bar" id="notice">
+    <div class="notice-inner">
+      <span class="notice-tag">本周更新</span>
+      <ul>
+        <li><b>新增 14 个分类入口</b><time datetime="2026-11-08">11 月 8 日</time></li>
+        <li><b>工具类条目补录 6 条</b><time datetime="2026-11-07">11 月 7 日</time></li>
+        <li><b>游戏频道入口重排</b><time datetime="2026-11-05">11 月 5 日</time></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 页头 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <svg width="38" height="38" viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" rx="14" fill="#0f2f3d"/>
+          <path d="M14 44V20h6l7 12 7-12h6v24h-6V31l-5 8h-4l-5-8v13z" fill="#67d6c1"/>
+          <circle cx="49" cy="24" r="5" fill="#f2b544"/>
+        </svg>
+        <div class="brand-text">
+          <span class="brand-name">mw777.me</span>
+          <span class="brand-sub">资源聚合导航</span>
+        </div>
+      </div>
+      <nav class="main-nav" aria-label="主题导航">
+        <a href="/#channels">频道索引</a>
+        <a href="/#picks">条目速览</a>
+        <a href="/#updates">更新动态</a>
+        <a href="/#cats">分类入口</a>
+        <a href="/#depth">深度解析</a>
+        <a href="/#guide">消费路径</a>
+        <a href="/#faq">常见问答</a>
+        <a href="/#comments">用户讨论</a>
+        <a href="/#news">相关资讯</a>
+        <a href="/#rank">热门榜单</a>
+      </nav>
+      <div class="header-tools">
+        <div class="search-box">
+          <svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6b8189" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="search" id="siteSearch" placeholder="搜索条目 / 分类" aria-label="搜索本页条目与分类">
+        </div>
+        <a class="btn-quick" href="/#picks">快速浏览</a>
+      </div>
+    </div>
+  </header>
+</div>
+
+<div class="wrap">
+  <div class="layout">
+
+    <!-- 左频道栏 -->
+    <aside class="channel-col" id="channels">
+      <h2>频道索引</h2>
+      <ul class="channel-list">
+        <li><a href="/#picks"><span class="dot"></span>游戏入口<span class="num">24</span></a></li>
+        <li><a href="/#picks"><span class="dot"></span>影视站群<span class="num">18</span></a></li>
+        <li><a href="/#picks"><span class="dot"></span>工具合集<span class="num">31</span></a></li>
+        <li><a href="/#picks"><span class="dot"></span>社区论坛<span class="num">12</span></a></li>
+        <li><a href="/#picks"><span class="dot"></span>阅读书库<span class="num">9</span></a></li>
+        <li><a href="/#picks"><span class="dot"></span>音乐电台<span class="num">8</span></a></li>
+        <li><a href="/#picks"><span class="dot"></span>素材图库<span class="num">15</span></a></li>
+        <li><a href="/#picks"><span class="dot"></span>学习课程<span class="num">11</span></a></li>
+        <li><a href="/#picks"><span class="dot"></span>网盘索引<span class="num">7</span></a></li>
+        <li><a href="/#picks"><span class="dot"></span>榜单聚合<span class="num">6</span></a></li>
+        <li><a href="/#picks"><span class="dot"></span>短链跳转<span class="num">5</span></a></li>
+        <li><a href="/#picks"><span class="dot"></span>镜像导航<span class="num">4</span></a></li>
+      </ul>
+      <div class="channel-note">频道数量按本周补录后统计，部分站点存在跨类收录，因此各频道合计大于总数。</div>
+    </aside>
+
+    <!-- 主内容 -->
+    <main class="main-col">
+
+      <!-- 首屏 -->
+      <section class="hero" aria-labelledby="heroTitle">
+        <div class="hero-grid">
+          <div>
+            <span class="eyebrow"><span class="bar"></span>资源聚合导航 · 分类速查</span>
+            <h1 id="heroTitle">mw777.me</h1>
+            <p class="hero-lead">这是一个围绕资源聚合站点整理的分类导航页面：把游戏、影视、工具、社区、阅读、音乐、图库、课程等入口类型拆开排列，标注每类站点偏重什么内容、适合什么使用场景，方便在比对多个入口时快速定位方向。</p>
+            <div class="hero-actions">
+              <a class="primary" href="/#picks">查看精选条目</a>
+              <a class="ghost" href="/#cats">按分类筛选</a>
+            </div>
+            <div class="hero-stats">
+              <div><b>12</b><span>频道类别</span></div>
+              <div><b>150+</b><span>收录条目</span></div>
+              <div><b>14</b><span>本周新增</span></div>
+            </div>
+          </div>
+          <div class="hero-visual" aria-hidden="true">
+            <svg viewBox="0 0 260 240" role="presentation">
+              <defs>
+                <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#67d6c1" stop-opacity=".95"/>
+                  <stop offset="1" stop-color="#2f8f9c" stop-opacity=".55"/>
+                </linearGradient>
+              </defs>
+              <rect x="16" y="18" width="228" height="52" rx="10" fill="rgba(255,255,255,.10)" stroke="rgba(255,255,255,.22)"/>
+              <rect x="30" y="34" width="72" height="9" rx="4.5" fill="#f2b544"/>
+              <rect x="30" y="50" width="120" height="6" rx="3" fill="rgba(255,255,255,.34)"/>
+              <rect x="16" y="84" width="108" height="70" rx="10" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.18)"/>
+              <rect x="136" y="84" width="108" height="70" rx="10" fill="url(#g1)" opacity=".85"/>
+              <rect x="16" y="168" width="108" height="54" rx="10" fill="url(#g1)" opacity=".55"/>
+              <rect x="136" y="168" width="108" height="54" rx="10" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.18)"/>
+              <circle cx="196" cy="119" r="19" fill="rgba(255,255,255,.22)"/>
+              <path d="M191 111l14 8-14 8z" fill="#fff"/>
+              <rect x="30" y="100" width="56" height="7" rx="3.5" fill="rgba(255,255,255,.55)"/>
+              <rect x="30" y="115" width="78" height="6" rx="3" fill="rgba(255,255,255,.28)"/>
+              <rect x="30" y="127" width="64" height="6" rx="3" fill="rgba(255,255,255,.28)"/>
+              <rect x="30" y="184" width="46" height="7" rx="3.5" fill="rgba(255,255,255,.6)"/>
+              <rect x="30" y="198" width="72" height="6" rx="3" fill="rgba(255,255,255,.3)"/>
+              <rect x="150" y="184" width="46" height="7" rx="3.5" fill="rgba(255,255,255,.55)"/>
+              <rect x="150" y="198" width="60" height="6" rx="3" fill="rgba(255,255,255,.28)"/>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- 1. 领域概览 -->
+      <section class="panel" id="overview" aria-labelledby="ovTitle">
+        <div class="panel-head">
+          <div>
+            <h2 id="ovTitle">资源聚合导航包含哪些方向</h2>
+            <div class="sub">从入口类型、内容形态到使用场景的梳理</div>
+          </div>
+        </div>
+        <div class="overview-cols">
+          <div>
+            <p>资源聚合导航的核心价值在于「分类」而非「堆叠」。一个成熟的导航站通常把入口拆成若干条主线：以浏览器直接访问为主的网页类站点、以文件分享为主的网盘索引、以内容消费为主的影音与阅读站点，以及以交流为主的社区论坛。四类站点的判断标准差别很大——网页类看重可用性与更新频率，网盘类看重有效性，影音类看重清晰度与字幕，社区类看重活跃度和版规严格程度。</p>
+            <p>以游戏方向为例，常见的入口又分成一站式游戏大厅、单机资源站、攻略社区和模拟器资源四类。一站式大厅适合随手玩，单机资源站适合找完整安装包，攻略社区解决卡关问题，模拟器资源则偏向特定平台的兼容性需求。同一个「游戏」标签下，实际使用路径完全不同，这也是导航页需要拆分细分类的原因。</p>
+          </div>
+          <div>
+            <p>影视方向的细分更明显：在线播放站、磁力/种子索引、字幕站、影评社区各自承担不同环节。很多访问者只记住「影视」两个字，结果进了磁力站却想要在线播放，体验落差往往来自入口选择错误。类似地，工具类目下也有在线工具、桌面软件下载、开源项目镜像、API 文档站的区别，混在一起看容易迷失。</p>
+            <p>近一年比较明显的变化是聚合站开始向「轻量化」和「主题化」两端发展：一端是只保留核心入口的精简导航，页面加载快、干扰少；另一端是按兴趣主题编排的专题页，比如单独做二次元、单独做设计素材。访问者如果清楚自己要什么，精简导航更高效；如果还在探索方向，主题化专题页的信息密度更有参考价值。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. 精选条目 -->
+      <section class="panel" id="picks" aria-labelledby="pickTitle">
+        <div class="panel-head">
+          <div>
+            <h2 id="pickTitle">精选条目速览</h2>
+            <div class="sub">按类型标签与看点整理，覆盖游戏、影视、工具、社区等方向</div>
+          </div>
+          <a class="more" href="/#cats">按分类查看</a>
+        </div>
+        <div class="card-grid" id="pickGrid">
+
+          <article class="card">
+            <div class="card-thumb">
+              <img src="https://picsum.photos/seed/mw-gamehall03/400/300" alt="游戏大厅入口界面示意" width="400" height="300" loading="lazy">
+              <span class="card-badge">游戏</span>
+            </div>
+            <div class="card-body">
+              <h3>极光游戏大厅</h3>
+              <div class="tag-row"><span class="tag">网页直玩</span><span class="tag">免安装</span><span class="tag gold">H5 合集</span></div>
+              <p class="card-desc">浏览器内直接启动的休闲游戏集合，包含消除、跑酷、棋牌三类，单局时长多在 3 分钟以内，适合碎片时间。</p>
+              <div class="card-meta"><span class="hot">热度 9.2</span><span>11-08 更新</span></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-thumb">
+              <img src="https://picsum.photos/seed/mw-filmindex08/400/300" alt="影视在线播放站分类页示意" width="400" height="300" loading="lazy">
+              <span class="card-badge">影视</span>
+            </div>
+            <div class="card-body">
+              <h3>影库在线分类页</h3>
+              <div class="tag-row"><span class="tag">在线播放</span><span class="tag">按题材</span><span class="tag gold">中文字幕</span></div>
+              <p class="card-desc">按悬疑、都市、古装、纪录四条主线归档的播放入口，每部作品标注集数与更新节奏，适合追更型观看。</p>
+              <div class="card-meta"><span class="hot">热度 8.8</span><span>11-07 更新</span></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-thumb">
+              <img src="https://picsum.photos/seed/mw-toolbox21/400/300" alt="在线工具聚合页界面示意" width="400" height="300" loading="lazy">
+              <span class="card-badge">工具</span>
+            </div>
+            <div class="card-body">
+              <h3>轻工具箱合集</h3>
+              <div class="tag-row"><span class="tag">在线转换</span><span class="tag">免登录</span><span class="tag gold">图片压缩</span></div>
+              <p class="card-desc">集中了 PDF 转换、图片压缩、二维码生成、文本去重等常用小工具，多数无需注册，处理结果直接下载。</p>
+              <div class="card-meta"><span class="hot">热度 9.5</span><span>11-08 更新</span></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-thumb">
+              <img src="https://picsum.photos/seed/mw-forum14/400/300" alt="兴趣社区论坛版块示意" width="400" height="300" loading="lazy">
+              <span class="card-badge">社区</span>
+            </div>
+            <div class="card-body">
+              <h3>拾光兴趣社区</h3>
+              <div class="tag-row"><span class="tag">分版讨论</span><span class="tag">资源分享</span><span class="tag gold">版规严格</span></div>
+              <p class="card-desc">以摄影、手作、独立游戏为主线的中型社区，版块按兴趣划分，置顶帖维护较勤，适合找同好与长文交流。</p>
+              <div class="card-meta"><span class="hot">热度 7.9</span><span>11-06 更新</span></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-thumb">
+              <img src="https://picsum.photos/seed/mw-booklib05/400/300" alt="在线阅读书库分类界面示意" width="400" height="300" loading="lazy">
+              <span class="card-badge">阅读</span>
+            </div>
+            <div class="card-body">
+              <h3>墨阁在线阅读</h3>
+              <div class="tag-row"><span class="tag">公版书</span><span class="tag">连载小说</span><span class="tag gold">夜间模式</span></div>
+              <p class="card-desc">公版经典与网络连载并存的阅读入口，支持字号调节与夜间模式，公版区可按作者与年代筛选。</p>
+              <div class="card-meta"><span class="hot">热度 8.1</span><span>11-05 更新</span></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-thumb">
+              <img src="https://picsum.photos/seed/mw-musicradio11/400/300" alt="音乐电台歌单页面示意" width="400" height="300" loading="lazy">
+              <span class="card-badge">音乐</span>
+            </div>
+            <div class="card-body">
+              <h3>耳畔音乐电台</h3>
+              <div class="tag-row"><span class="tag">场景歌单</span><span class="tag">无损试听</span><span class="tag gold">纯音乐</span></div>
+              <p class="card-desc">以学习、通勤、睡前三类场景组织的歌单站点，纯音乐与轻电子占比较高，支持连续播放不中断。</p>
+              <div class="card-meta"><span class="hot">热度 8.4</span><span>11-04 更新</span></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-thumb">
+              <img src="https://picsum.photos/seed/mw-picstock17/400/300" alt="免费素材图库分类示意" width="400" height="300" loading="lazy">
+              <span class="card-badge">素材</span>
+            </div>
+            <div class="card-body">
+              <h3>素白免费图库</h3>
+              <div class="tag-row"><span class="tag">可商用</span><span class="tag">按色系</span><span class="tag gold">高清原图</span></div>
+              <p class="card-desc">提供背景图、纹理、扁平插画三类素材，支持按主色筛选，多数条目注明授权范围，适合做封面与海报。</p>
+              <div class="card-meta"><span class="hot">热度 9.0</span><span>11-08 更新</span></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-thumb">
+              <img src="https://picsum.photos/seed/mw-course09/400/300" alt="在线课程目录页面示意" width="400" height="300" loading="lazy">
+              <span class="card-badge">学习</span>
+            </div>
+            <div class="card-body">
+              <h3>阶梯课程目录</h3>
+              <div class="tag-row"><span class="tag">免费公开课</span><span class="tag">按难度</span><span class="tag gold">编程入门</span></div>
+              <p class="card-desc">按入门、进阶、实战三档排列的公开课索引，编程与设计方向课程较全，每门标注时长与前置要求。</p>
+              <div class="card-meta"><span class="hot">热度 8.6</span><span>11-07 更新</span></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-thumb">
+              <img src="https://picsum.photos/seed/mw-netdisk02/400/300" alt="网盘资源索引页面示意" width="400" height="300" loading="lazy">
+              <span class="card-badge">网盘</span>
+            </div>
+            <div class="card-body">
+              <h3>云盘索引速查</h3>
+              <div class="tag-row"><span class="tag">资源索引</span><span class="tag">按格式</span><span class="tag gold">有效性标注</span></div>
+              <p class="card-desc">按文档、软件、影音三类格式组织的网盘资源索引，每条标注最近核验时间，失效条目会集中归入待清理区。</p>
+              <div class="card-meta"><span class="hot">热度 7.6</span><span>11-03 更新</span></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-thumb">
+              <img src="https://picsum.photos/seed/mw-mirror06/400/300" alt="镜像站点导航页面示意" width="400" height="300" loading="lazy">
+              <span class="card-badge">镜像</span>
+            </div>
+            <div class="card-body">
+              <h3>镜像站点导航表</h3>
+              <div class="tag-row"><span class="tag">备用入口</span><span class="tag">状态监测</span><span class="tag gold">延迟显示</span></div>
+              <p class="card-desc">汇总常用站点的多个备用域名，标注最近一次连通状态与响应延迟，适合在主入口无法打开时切换。</p>
+              <div class="card-meta"><span class="hot">热度 7.3</span><span>11-08 更新</span></div>
+            </div>
+          </article>
+
+        </div>
+        <div class="no-result" id="searchNoResult">没有找到匹配的条目，换个关键词试试，例如「游戏」「工具」「影视」。</div>
+      </section>
+
+      <!-- 3. 更新动态 -->
+      <section class="panel" id="updates" aria-labelledby="upTitle">
+        <div class="panel-head">
+          <div>
+            <h2 id="upTitle">最新更新与动态</h2>
+            <div class="sub">近期补录、调整与状态变化</div>
+          </div>
+        </div>
+        <ul class="feed">
+          <li><time datetime="2026-11-08">今天 09:30</time><div><span class="feed-title">轻工具箱合集</span> <span class="feed-desc">新增「批量图片压缩」入口，支持一次上传 20 张。</span></div><span class="feed-tag">工具</span></li>
+          <li><time datetime="2026-11-08">今天 08:05</time><div><span class="feed-title">镜像站点导航表</span> <span class="feed-desc">补充 4 个备用域名，连通状态已复核。</span></div><span class="feed-tag">镜像</span></li>
+          <li><time datetime="2026-11-07">昨天 21:10</time><div><span class="feed-title">影库在线分类页</span> <span class="feed-desc">悬疑题材新增 6 部作品，标注了集数与更新日。</span></div><span class="feed-tag">影视</span></li>
+          <li><time datetime="2026-11-07">昨天 16:42</time><div><span class="feed-title">阶梯课程目录</span> <span class="feed-desc">编程入门区补录 3 门 Python 基础课，含时长信息。</span></div><span class="feed-tag">学习</span></li>
+          <li><time datetime="2026-11-06">11 月 6 日</time><div><span class="feed-title">拾光兴趣社区</span> <span class="feed-desc">独立游戏版块置顶帖更新，补充了发帖格式要求。</span></div><span class="feed-tag">社区</span></li>
+          <li><time datetime="2026-11-05">11 月 5 日</time><div><span class="feed-title">墨阁在线阅读</span> <span class="feed-desc">公版书区新增 12 本民国时期散文集。</span></div><span class="feed-tag">阅读</span></li>
+          <li><time datetime="2026-11-04">11 月 4 日</time><div><span class="feed-title">耳畔音乐电台</span> <span class="feed-desc">「通勤」歌单扩充至 80 首，新增轻电子分区。</span></div><span class="feed-tag">音乐</span></li>
+          <li><time datetime="2026-11-03">11 月 3 日</time><div><span class="feed-title">云盘索引速查</span> <span class="feed-desc">完成一轮有效性核验，清理失效条目 9 条。</span></div><span class="feed-tag">网盘</span></li>
+          <li><time datetime="2026-11-02">11 月 2 日</time><div><span class="feed-title">素白免费图库</span> <span class="feed-desc">新增「低饱和背景」专题，共 46 张可商用图。</span></div><span class="feed-tag">素材</span></li>
+          <li><time datetime="2026-11-01">11 月 1 日</time><div><span class="feed-title">极光游戏大厅</span> <span class="feed-desc">棋牌分区上架 2 款新 H5 小游戏，支持手机横屏。</span></div><span class="feed-tag">游戏</span></li>
+        </ul>
+      </section>
+
+      <!-- 4. 分类入口 -->
+      <section class="panel" id="cats" aria-labelledby="catTitle">
+        <div class="panel-head">
+          <div>
+            <h2 id="catTitle">分类入口</h2>
+            <div class="sub">按内容方向定位，点击筛选下方条目</div>
+          </div>
+        </div>
+        <div class="cat-grid" role="group" aria-label="分类筛选">
+          <a class="cat-item" href="/#picks" data-cat="游戏"><b>游戏</b><span>网页直玩、单机资源、攻略社区</span></a>
+          <a class="cat-item" href="/#picks" data-cat="影视"><b>影视</b><span>在线播放、字幕、磁力索引</span></a>
+          <a class="cat-item" href="/#picks" data-cat="工具"><b>工具</b><span>格式转换、图片处理、文本工具</span></a>
+          <a class="cat-item" href="/#picks" data-cat="社区"><b>社区</b><span>兴趣论坛、资源分享、版规讨论</span></a>
+          <a class="cat-item" href="/#picks" data-cat="阅读"><b>阅读</b><span>公版书、连载小说、书单整理</span></a>
+          <a class="cat-item" href="/#picks" data-cat="音乐"><b>音乐</b><span>场景歌单、纯音乐、电台</span></a>
+          <a class="cat-item" href="/#picks" data-cat="素材"><b>素材</b><span>背景图、纹理、扁平插画</span></a>
+          <a class="cat-item" href="/#picks" data-cat="学习"><b>学习</b><span>公开课、编程入门、设计教程</span></a>
+        </div>
+      </section>
+
+      <!-- 5. 深度解析 -->
+      <section class="panel article" id="depth" aria-labelledby="depthTitle">
+        <div class="panel-head">
+          <div>
+            <h2 id="depthTitle">深度解析：如何判断一个聚合入口值不值得用</h2>
+            <div class="sub">从类型差异、条目特征到判断维度</div>
+          </div>
+        </div>
+
+        <h3>聚合站与单一站点的实际差别</h3>
+        <p>聚合导航页本身不生产内容，它做的事情是把分散的入口按用途排列。判断一个聚合页是否有价值，关键看它有没有做「区分」：同样叫影视，有没有分出在线播放和资源索引；同样叫工具，有没有分在线处理和桌面下载。分得越细，访问者选错的概率越低。反过来，如果一个导航页只是把几十个链接平铺，没有分类说明、没有状态标注，它的实际效率可能还不如直接搜索。</p>
+        <p>单一站点则相反，它把所有功能收在一个域名下，界面统一但深度有限。聚合页的优势是横向对比，劣势是每个入口的细节需要跳转后才知道。因此在聚合页上停留的时间，应该主要花在看分类说明和状态标注上，而不是逐个点开。</p>
+
+        <h3>影音类入口的判断维度</h3>
+        <p>影音方向最容易被「有没有资源」这一个问题带偏。实际选择时至少要同时看四项：</p>
+        <ul>
+          <li><b>播放方式</b>——在线播放站打开即看，磁力索引需要客户端配合，两者适合的场景完全不同。</li>
+          <li><b>字幕情况</b>——是否内嵌、是否可切换、更新是否跟得上，直接影响观看体验。</li>
+          <li><b>更新节奏</b>——追更型作品要看是否与播出同步，标注「每周三更新」比笼统写「持续更新」有用得多。</li>
+          <li><b>页面干扰度</b>——弹窗、跳转、自动播放多的站点，即使资源全也会消耗耐心。</li>
+        </ul>
+        <div class="callout">一个实用经验：先看站点有没有明确的「更新记录」页。愿意维护更新记录的站点，通常内容维护也更稳定。</div>
+
+        <h3>工具类入口的取舍</h3>
+        <p>在线工具和桌面软件的分界，主要看任务是否需要反复执行。偶尔转一次 PDF，用在线工具最省事；每天都要处理几十张图片，桌面软件或脚本更合适。在线工具还要关注三点：文件大小限制、是否需要登录、处理完成后是否保留文件。前两点影响可用性，第三点关系到隐私。</p>
+        <p>开源项目镜像则属于另一类需求，使用者通常已经知道要什么，重点在于版本完整度和下载速度。这类入口不需要花哨介绍，能稳定提供历史版本反而更重要。</p>
+
+        <h3>社区类入口的活跃度识别</h3>
+        <p>判断一个论坛是否还活着，看三个地方最直接：首页最新回复的时间、置顶帖的维护日期、版主最近一次操作记录。如果最新回复停在几个月前，说明人气已经流失；如果置顶帖里的规则还是两年前的版本，管理大概率已经松散。相比之下，注册人数、帖子总数这类累计数字参考价值有限。</p>
+        <p>版规严格程度也值得提前了解。规则细、执行严的社区，讨论质量通常更稳定，但发帖门槛也高；规则宽松的社区上手快，但信息噪音大。选择哪一种，取决于你是想快速提问，还是想长期沉淀内容。</p>
+
+        <h3>网盘索引的时效问题</h3>
+        <p>网盘类入口最大的变量是有效性。一个索引页如果标注了每条资源的核验日期，可信度会明显高于只写「长期有效」的页面。实际使用时，优先选择近一周内核验过的条目，超过一个月的条目要有失效预期。</p>
+        <p>另外要注意索引页本身是否区分了文件格式。文档、软件、影音三类资源的组织方式差别很大，混在一起排列的索引，检索效率通常不高。</p>
+      </section>
+
+      <!-- 6. 消费路径 -->
+      <section class="panel" id="guide" aria-labelledby="guideTitle">
+        <div class="panel-head">
+          <div>
+            <h2 id="guideTitle">使用路径：从明确需求到选定入口</h2>
+            <div class="sub">按顺序推进，减少反复试错</div>
+          </div>
+        </div>
+        <ol class="steps">
+          <li><b>先确定任务类型</b>要在线看、要下载文件、要处理格式、要找人讨论，四类任务对应的入口完全不同。任务没说清之前，不要急着点开链接。</li>
+          <li><b>再匹配频道</b>影音任务进影视与音乐频道，文件任务进网盘与工具频道，交流任务进社区频道。频道说明里通常写了该类站点的典型特征，先读一句再进。</li>
+          <li><b>看状态标注</b>优先选择近期有更新记录、标注了核验日期的条目。状态栏空白的入口，先当作待验证处理。</li>
+          <li><b>小成本试一次</b>进入后先完成一个最小动作：播放一集、转换一个文件、发一条回复。能顺利完成再决定是否长期使用。</li>
+          <li><b>记录可用入口</b>把通过验证的入口记下来，下次同类任务直接复用，不必重新筛选。</li>
+        </ol>
+        <div class="compare" style="margin-top:18px">
+          <div class="ch">追更型观看</div>
+          <div class="ch">补看型观看</div>
+          <div class="cell">优先选更新节奏明确、与播出同步的在线站，关注「每周几更新」标注。</div>
+          <div class="cell">优先选整季齐全、可按题材筛选的站点，不必在意单集更新速度。</div>
+          <div class="cell">字幕可切换比内嵌更重要，方便对照原声。</div>
+          <div class="cell">清晰度与集数完整度优先，字幕内嵌也可接受。</div>
+        </div>
+      </section>
+
+      <!-- 7. FAQ -->
+      <section class="panel" id="faq" aria-labelledby="faqTitle">
+        <div class="panel-head">
+          <div>
+            <h2 id="faqTitle">常见问答</h2>
+            <div class="sub">关于入口选择与使用判断的高频问题</div>
+          </div>
+        </div>
+        <div class="faq">
+          <details>
+            <summary>在线播放站和磁力索引站有什么区别，该选哪个？</summary>
+            <div class="ans"><p>在线播放站打开页面即可观看，适合不想安装客户端的场景，但清晰度和字幕可选项通常有限。磁力索引站提供的是资源定位信息，需要配合下载工具使用，清晰度和字幕版本选择更多，但需要等待下载。追更看剧优先在线站，想收藏高码率版本再考虑索引站。</p></div>
+          </details>
+          <details>
+            <summary>影视类入口一般多久更新一次比较正常？</summary>
+            <div class="ans"><p>与播出同步的剧集，正常节奏是播出后数小时到一天内上线中文字幕版本。如果一部周更剧在播出三天后仍未更新，且站点没有说明延迟原因，基本可以判断该入口维护不稳定。整季完结的作品则不存在这个问题，重点看集数是否齐全。</p></div>
+          </details>
+          <details>
+            <summary>第一次接触这类导航页，从哪个分类开始看比较好？</summary>
+            <div class="ans"><p>建议从自己当下最明确的需求入手。如果只是想找点东西玩，游戏频道的网页直玩类目门槛最低；如果需要处理文件，工具频道的在线转换类目最直接。不建议一上来就逐个点开所有频道，那样信息量过大，反而难以判断。</p></div>
+          </details>
+          <details>
+            <summary>网盘索引里标注「长期有效」的资源可信吗？</summary>
+            <div class="ans"><p>「长期有效」只是一种声明，不能代替核验。更可靠的做法是看索引页有没有标注具体的核验日期，以及是否把失效条目单独归类。近一周内核验过的条目成功率明显更高，超过一个月的要有心理准备。</p></div>
+          </details>
+          <details>
+            <summary>怎么判断一个兴趣社区还活跃？</summary>
+            <div class="ans"><p>看三个信号：首页最新回复的时间是否在近几天内、置顶帖的维护日期是否近期、版块内是否有新的长文讨论。累计注册人数和帖子总数参考意义不大，很多老社区数字很大但日常发言很少。</p></div>
+          </details>
+          <details>
+            <summary>在线工具和桌面软件，处理图片该用哪种？</summary>
+            <div class="ans"><p>偶发需求用在线工具，上传、处理、下载三步完成，不用安装。需要批量处理、固定参数、反复执行时，桌面软件或命令行工具效率更高，也不受单次文件数量和大小限制。涉及敏感图片时，优先本地处理。</p></div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 8. 用户评论 -->
+      <section class="panel" id="comments" aria-labelledby="cmtTitle">
+        <div class="panel-head">
+          <div>
+            <h2 id="cmtTitle">用户讨论</h2>
+            <div class="sub">围绕具体条目与类型的真实使用反馈</div>
+          </div>
+        </div>
+        <div class="comments">
+          <div class="cmt"><div class="cmt-head"><span class="avatar">林</span><span class="cmt-name">林间慢跑</span><span class="cmt-meta">11-08</span></div><p>极光游戏大厅的棋牌分区做得比预期好，手机横屏适配到位，午休玩两局刚好。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">周</span><span class="cmt-name">周末补剧</span><span class="cmt-meta">11-08</span></div><p>影库的悬疑分类标注了集数，这点很实用。之前进过不标集数的站，追到一半发现缺集。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">陈</span><span class="cmt-name">陈工搬砖</span><span class="cmt-meta">11-07</span></div><p>轻工具箱的批量压缩解决了我的问题，20 张图一次搞定，不用装软件。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">许</span><span class="cmt-name">许愿不加班</span><span class="cmt-meta">11-07</span></div><p>镜像导航表的延迟标注挺有用，主站打不开时按延迟排序切一个就行。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">何</span><span class="cmt-name">何处听风</span><span class="cmt-meta">11-07</span></div><p>耳畔的通勤歌单偏轻电子，喜欢重节奏的可能不太合适，但学习场景很好用。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">苏</span><span class="cmt-name">苏打水加冰</span><span class="cmt-meta">11-06</span></div><p>拾光社区的独立游戏版块置顶帖写得很细，发帖格式要求明确，新手不容易踩坑。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">郭</span><span class="cmt-name">郭子看片</span><span class="cmt-meta">11-06</span></div><p>影库的字幕可切换这点不错，但部分老片只有内嵌字幕，希望后续补上外挂版本。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">吴</span><span class="cmt-name">吴聊设计</span><span class="cmt-meta">11-06</span></div><p>素白图库按色系筛选很顺手，做海报找背景省了不少时间，授权说明也写得清楚。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">郑</span><span class="cmt-name">郑在学代码</span><span class="cmt-meta">11-05</span></div><p>阶梯课程的难度分档合理，Python 入门那几门标注了前置要求，选课前心里有数。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">冯</span><span class="cmt-name">冯叔的硬盘</span><span class="cmt-meta">11-05</span></div><p>云盘索引核验日期这个设计很实在，按时间排序后失效的明显少了。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">孙</span><span class="cmt-name">孙小满</span><span class="cmt-meta">11-05</span></div><p>墨阁的公版书区按年代筛选好用，民国散文那一批找得挺全。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">马</span><span class="cmt-name">马不停蹄</span><span class="cmt-meta">11-04</span></div><p>整体分类逻辑清楚，但工具区在线和下载两类有时会混在一起，希望再拆细一点。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">朱</span><span class="cmt-name">朱砂记</span><span class="cmt-meta">11-04</span></div><p>游戏大厅的 H5 合集加载速度可以，就是部分游戏广告稍多，玩之前要有准备。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">胡</span><span class="cmt-name">胡椒薄荷</span><span class="cmt-meta">11-03</span></div><p>社区类目里拾光的版规最严，讨论质量确实高，但新人发帖要先读规则。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">高</span><span class="cmt-name">高架桥下</span><span class="cmt-meta">11-03</span></div><p>音乐电台的睡前歌单循环一晚上没断过，比预期稳定。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">罗</span><span class="cmt-name">罗盘指向北</span><span class="cmt-meta">11-02</span></div><p>镜像表更新及时，周四主站挂了一次，切备用域名五分钟内恢复访问。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">梁</span><span class="cmt-name">梁上燕</span><span class="cmt-meta">11-02</span></div><p>影视分类如果能把纪录片单独拆出来会更好，现在混在古装里找起来费劲。</p></div>
+          <div class="cmt"><div class="cmt-head"><span class="avatar">谢</span><span class="cmt-name">谢顶程序员</span><span class="cmt-meta">11-01</span></div><p>工具箱里的文本去重处理大文件时偶尔卡顿，小文件没问题，日常够用。</p></div>
+        </div>
+      </section>
+
+      <!-- 9. 相关资讯 -->
+      <section class="panel" id="news" aria-labelledby="newsTitle">
+        <div class="panel-head">
+          <div>
+            <h2 id="newsTitle">相关资讯</h2>
+            <div class="sub">近期条目上线、类型变化与规则调整</div>
+          </div>
+        </div>
+        <div class="news">
+          <article class="news-item">
+            <img src="https://picsum.photos/seed/mw-news-tool01/600/400" alt="在线工具新增批量处理功能示意" width="600" height="400" loading="lazy">
+            <div>
+              <h3>多家在线工具站上线批量图片压缩</h3>
+              <div class="news-meta">2026-11-08 · 工具</div>
+              <p>轻工具箱合集本周新增批量压缩入口，单次最多 20 张，处理结果打包下载，免登录可用。</p>
+            </div>
+          </article>
+          <article class="news-item">
+            <img src="https://picsum.photos/seed/mw-news-film02/600/400" alt="悬疑题材剧集上新示意" width="600" height="400" loading="lazy">
+            <div>
+              <h3>悬疑题材周更剧集集中上线</h3>
+              <div class="news-meta">2026-11-07 · 影视</div>
+              <p>影库在线分类页悬疑区新增 6 部周更作品，均标注了更新日与集数，其中 3 部提供外挂字幕。</p>
+            </div>
+          </article>
+          <article class="news-item">
+            <img src="https://picsum.photos/seed/mw-news-forum03/600/400" alt="社区版规更新公告示意" width="600" height="400" loading="lazy">
+            <div>
+              <h3>拾光社区调整独立游戏版发帖格式</h3>
+              <div class="news-meta">2026-11-06 · 社区</div>
+              <p>新版规要求资源帖注明版本号与适配平台，置顶帖已同步更新示例，旧帖进入逐步整理阶段。</p>
+            </div>
+          </article>
+          <article class="news-item">
+            <img src="https://picsum.photos/seed/mw-news-course04/600/400" alt="公开课补录示意" width="600" height="400" loading="lazy">
+            <div>
+              <h3>阶梯课程补录 Python 基础系列</h3>
+              <div class="news-meta">2026-11-04 · 学习</div>
+              <p>编程入门区新增 3 门基础课，每门标注总时长与前置要求，配套练习已可在线预览。</p>
+            </div>
+          </article>
+          <article class="news-item">
+            <img src="https://picsum.photos/seed/mw-news-netdisk05/600/400" alt="网盘索引核验结果示意" width="600" height="400" loading="lazy">
+            <div>
+              <h3>网盘索引完成一轮有效性核验</h3>
+              <div class="news-meta">2026-11-03 · 网盘</div>
+              <p>本轮核验覆盖全部索引条目，清理失效链接 9 条，保留条目均标注了最近的核验日期。</p>
+            </div>
+          </article>
+          <article class="news-item">
+            <img src="https://picsum.photos/seed/mw-news-music06/600/400" alt="场景歌单扩充示意" width="600" height="400" loading="lazy">
+            <div>
+              <h3>通勤歌单扩充并新增轻电子分区</h3>
+              <div class="news-meta">2026-11-02 · 音乐</div>
+              <p>耳畔音乐电台通勤歌单扩充至 80 首，新增轻电子分区，连续播放不插入中断提示。</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 10. 相关推荐 -->
+      <section class="panel" id="related" aria-labelledby="relTitle">
+        <div class="panel-head">
+          <div>
+            <h2 id="relTitle">延伸方向</h2>
+            <div class="sub">与当前分类相邻的具体内容方向</div>
+          </div>
+        </div>
+        <ul class="reclist">
+          <li><a href="/#picks">网页直玩小游戏</a></li>
+          <li><a href="/#picks">周更剧集追更站</a></li>
+          <li><a href="/#picks">图片批量压缩工具</a></li>
+          <li><a href="/#picks">外挂字幕资源站</a></li>
+          <li><a href="/#picks">公版书在线阅读</a></li>
+          <li><a href="/#picks">可商用背景图库</a></li>
+          <li><a href="/#picks">编程入门公开课</a></li>
+          <li><a href="/#picks">备用域名状态监测</a></li>
+        </ul>
+      </section>
+
+      <!-- 11. 补充：热门榜单 + 时间线 -->
+      <section class="panel" id="rank" aria-labelledby="rankTitle">
+        <div class="panel-head">
+          <div>
+            <h2 id="rankTitle">本周热门条目榜</h2>
+            <div class="sub">按近七天访问与讨论热度整理</div>
+          </div>
+        </div>
+        <ol class="rank">
+          <li><div><span class="rk-name">轻工具箱合集</span><div class="rk-desc">批量压缩上线后访问明显上升，免登录是主要加分项。</div></div><span class="rk-score">9.5</span></li>
+          <li><div><span class="rk-name">极光游戏大厅</span><div class="rk-desc">棋牌分区新增两款 H5 游戏，碎片时间场景稳定输出。</div></div><span class="rk-score">9.2</span></li>
+          <li><div><span class="rk-name">素白免费图库</span><div class="rk-desc">低饱和背景专题带动检索量，授权说明清晰受设计用户欢迎。</div></div><span class="rk-score">9.0</span></li>
+          <li><div><span class="rk-name">影库在线分类页</span><div class="rk-desc">悬疑区集中上新，集数与更新日标注带来正向反馈。</div></div><span class="rk-score">8.8</span></li>
+          <li><div><span class="rk-name">阶梯课程目录</span><div class="rk-desc">Python 基础补录后入门区完整度提升，前置要求标注实用。</div></div><span class="rk-score">8.6</span></li>
+          <li><div><span class="rk-name">耳畔音乐电台</span><div class="rk-desc">通勤歌单扩充，轻电子分区切中日常播放场景。</div></div><span class="rk-score">8.4</span></li>
+          <li><div><span class="rk-name">墨阁在线阅读</span><div class="rk-desc">公版散文集补充后，按年代筛选的使用频率上升。</div></div><span class="rk-score">8.1</span></li>
+          <li><div><span class="rk-name">拾光兴趣社区</span><div class="rk-desc">版规调整带来短期讨论热度，发帖格式示例被多次引用。</div></div><span class="rk-score">7.9</span></li>
+        </ol>
+
+        <h3 style="font-size:16px;color:var(--brand);margin:24px 0 12px;padding-left:11px;border-left:3px solid var(--accent)">本月条目变动时间线</h3>
+        <ul class="timeline">
+          <li><time datetime="2026-11-08">11 月 8 日</time><b>工具与镜像类集中更新</b><p>批量压缩入口上线，镜像表补充 4 个备用域名并复核连通状态。</p></li>
+          <li><time datetime="2026-11-07">11 月 7 日</time><b>影视与课程区补录</b><p>悬疑题材新增 6 部作品，编程入门补录 3 门 Python 基础课。</p></li>
+          <li><time datetime="2026-11-04">11 月 4 日</time><b>音乐歌单扩充</b><p>通勤歌单增至 80 首，新增轻电子分区。</p></li>
+          <li><time datetime="2026-11-03">11 月 3 日</time><b>网盘索引核验</b><p>全量核验一轮，清理失效链接 9 条。</p></li>
+        </ul>
+      </section>
+
+    </main>
+
+    <!-- 右辅助栏 -->
+    <aside class="aside-col" aria-label="辅助信息">
+      <div class="aside-card">
+        <h2>热榜速览 <span class="cnt">近 7 天</span></h2>
+        <ol class="hot-list">
+          <li><a href="/#picks">轻工具箱合集<span class="tagline">批量压缩 · 免登录</span></a></li>
+          <li><a href="/#picks">极光游戏大厅<span class="tagline">H5 棋牌 · 手机横屏</span></a></li>
+          <li><a href="/#picks">素白免费图库<span class="tagline">低饱和背景 · 可商用</span></a></li>
+          <li><a href="/#picks">影库在线分类页<span class="tagline">悬疑上新 · 外挂字幕</span></a></li>
+          <li><a href="/#picks">阶梯课程目录<span class="tagline">Python 入门 · 分档</span></a></li>
+          <li><a href="/#picks">耳畔音乐电台<span class="tagline">通勤歌单 · 轻电子</span></a></li>
+          <li><a href="/#picks">墨阁在线阅读<span class="tagline">公版散文 · 年代筛选</span></a></li>
+          <li><a href="/#picks">拾光兴趣社区<span class="tagline">版规更新 · 独立游戏</span></a></li>
+        </ol>
+      </div>
+
+      <div class="aside-card">
+        <h2>更新流 <span class="cnt">本周</span></h2>
+        <ul class="update-list">
+          <li><time datetime="2026-11-08">11-08</time><span>批量图片压缩入口上线</span></li>
+          <li><time datetime="2026-11-08">11-08</time><span>镜像表补 4 个备用域名</span></li>
+          <li><time datetime="2026-11-07">11-07</time><span>悬疑区新增 6 部周更剧</span></li>
+          <li><time datetime="2026-11-07">11-07</time><span>Python 基础课补录 3 门</span></li>
+          <li><time datetime="2026-11-06">11-06</time><span>社区发帖格式调整</span></li>
+          <li><time datetime="2026-11-05">11-05</time><span>公版散文集新增 12 本</span></li>
+          <li><time datetime="2026-11-03">11-03</time><span>网盘索引完成核验</span></li>
+        </ul>
+      </div>
+
+      <div class="aside-card">
+        <h2>常用标签</h2>
+        <div class="quick-tags">
+          <a href="/#picks">网页直玩</a>
+          <a href="/#picks">在线转换</a>
+          <a href="/#picks">外挂字幕</a>
+          <a href="/#picks">可商用素材</a>
+          <a href="/#picks">场景歌单</a>
+          <a href="/#picks">公开课</a>
+          <a href="/#picks">备用域名</a>
+          <a href="/#picks">版规解读</a>
+        </div>
+        <div class="aside-note">条目状态按最近一次核验记录标注，选择入口时优先参考带日期的条目。</div>
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+<!-- 页尾 -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <svg width="34" height="34" viewBox="0 0 64 64" aria-hidden="true">
+            <rect width="64" height="64" rx="14" fill="#175263"/>
+            <path d="M14 44V20h6l7 12 7-12h6v24h-6V31l-5 8h-4l-5-8v13z" fill="#67d6c1"/>
+            <circle cx="49" cy="24" r="5" fill="#f2b544"/>
+          </svg>
+          <div class="brand-text">
+            <span class="brand-name">mw777.me</span>
+            <span class="brand-sub">资源聚合导航</span>
+          </div>
+        </div>
+        <p class="footer-about">围绕游戏、影视、工具、社区、阅读、音乐、素材、学习八类入口整理资源聚合导航，标注条目类型、状态与使用场景，帮助访问者按需求定位方向。</p>
+      </div>
+      <div class="footer-cols">
+        <div>
+          <h3>内容频道</h3>
+          <ul>
+            <li><a href="/#picks">游戏入口</a></li>
+            <li><a href="/#picks">影视站群</a></li>
+            <li><a href="/#picks">工具合集</a></li>
+            <li><a href="/#picks">社区论坛</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>延伸方向</h3>
+          <ul>
+            <li><a href="/#picks">阅读书库</a></li>
+            <li><a href="/#picks">音乐电台</a></li>
+            <li><a href="/#picks">素材图库</a></li>
+            <li><a href="/#picks">学习课程</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>使用参考</h3>
+          <ul>
+            <li><a href="/#depth">判断维度解析</a></li>
+            <li><a href="/#guide">使用路径</a></li>
+            <li><a href="/#faq">常见问答</a></li>
+            <li><a href="/#rank">热门榜单</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 mw777.me 资源聚合导航</span>
+      <span class="disclaimer">部分内容为示例数据，仅用于展示页面结构</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var input = document.getElementById('siteSearch');
+  var grid = document.getElementById('pickGrid');
+  var noResult = document.getElementById('searchNoResult');
+  if(!input || !grid) return;
+  var cards = Array.prototype.slice.call(grid.querySelectorAll('.card'));
+  var catLinks = Array.prototype.slice.call(document.querySelectorAll('.cat-item'));
+
+  function applyFilter(kw){
+    kw = (kw || '').trim().toLowerCase();
+    var shown = 0;
+    cards.forEach(function(card){
+      var text = card.textContent.toLowerCase();
+      var hit = !kw || text.indexOf(kw) !== -1;
+      card.style.display = hit ? '' : 'none';
+      if(hit) shown++;
+    });
+    if(noResult) noResult.classList.toggle('show', shown === 0);
+  }
+
+  input.addEventListener('input', function(){
+    applyFilter(input.value);
+  });
+
+  catLinks.forEach(function(link){
+    link.addEventListener('click', function(){
+      var cat = link.getAttribute('data-cat') || '';
+      if(input){ input.value = cat; }
+      applyFilter(cat);
+    });
+  });
+})();
+</script>
+
+</body>
+  </html>
